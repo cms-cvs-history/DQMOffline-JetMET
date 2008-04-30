@@ -2,25 +2,38 @@
 module jetMETAnalyzer = JetMETAnalyzer
 {
     
-    InputTag CaloJetsCollectionLabel = iterativeCone5CaloJets
+    InputTag ICJetsCollectionLabel   = iterativeCone5CaloJets
+    InputTag SCJetsCollectionLabel   = sisCone5CaloJets
+//    InputTag CaloJetsCollectionLabel = iterativeCone5CaloJets
     InputTag PFJetsCollectionLabel   = iterativeCone5PFJets
     InputTag CaloMETCollectionLabel  = met
         
-    untracked bool DoJetAnalysis = true
+    untracked bool DoJetAnalysis   = true
+//    untracked bool DoSCJetAnalysis = true
+//    untracked bool DoICJetAnalysis = true
     PSet jetAnalysis = {  
 	
-	int32 phiBin = 100
+	int32 phiBin  = 70
 	double phiMin = -3.2
 	double phiMax = 3.2
 	
-	int32 etaBin = 100
-	double etaMin = -3.0
-	double etaMax = 3.0
+	int32 etaBin  = 100
+	double etaMin = -5.0
+	double etaMax = 5.0
 
-	int32 ptBin = 500
-	double ptMin = 0.0
-	double ptMax = 500.0       	
+	int32 ptBin   = 100
+	double ptMin  = 0.0
+	double ptMax  = 50.0       	
+
+	int32 eBin   = 100
+	double eMin  = 0.0
+	double eMax  = 500.0       	
+
+	int32 pBin   = 100
+	double pMin  = 0.0
+	double pMax  = 500.0       	
     }
+
     
     untracked bool DoPFJetAnalysis = true
     PSet pfJetAnalysis = {  
