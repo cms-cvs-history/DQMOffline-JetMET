@@ -43,7 +43,7 @@ module jetMETAnalyzer = JetMETAnalyzer
     PSet caloMETAnalysis = {  
     }
 
-    bool OutputMEsInRootFile = true
+    bool OutputMEsInRootFile = false
     string OutputFileName="jetMETMonitoring.root"
 
 }
