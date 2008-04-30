@@ -1,0 +1,36 @@
+# JetMETAnalyzer
+module jetMETAnalyzer = JetMETAnalyzer
+{
+    
+    InputTag CaloJetsCollectionLabel = iterativeCone5CaloJets
+    InputTag PFJetsCollectionLabel   = iterativeCone5PFJets
+    InputTag CaloMETCollectionLabel  = met
+        
+    untracked bool DoJetAnalysis = true
+    PSet jetAnalysis = {  
+	
+	int32 phiBin = 100
+	double phiMin = -3.2
+	double phiMax = 3.2
+	
+	int32 etaBin = 100
+	double etaMin = -3.0
+	double etaMax = 3.0
+
+	int32 ptBin = 500
+	double ptMin = 0.0
+	double ptMax = 500.0       	
+    }
+    
+    untracked bool DoPFJetAnalysis = true
+    PSet pfJetAnalysis = {  
+    }
+
+    untracked bool DoCaloMETAnalysis = true
+    PSet caloMETAnalysis = {  
+    }
+
+    bool OutputMEsInRootFile = true
+    string OutputFileName="jetMETMonitoring.root"
+
+}
