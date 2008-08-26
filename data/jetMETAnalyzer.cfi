@@ -7,6 +7,8 @@ module jetMETAnalyzer = JetMETAnalyzer
 //    InputTag CaloJetsCollectionLabel = iterativeCone5CaloJets
     InputTag PFJetsCollectionLabel   = iterativeCone5PFJets
     InputTag CaloMETCollectionLabel  = met
+    InputTag CaloMETNoHFCollectionLabel  = metNoHF
+
         
     untracked bool DoJetAnalysis   = true
 //    untracked bool DoSCJetAnalysis = true
