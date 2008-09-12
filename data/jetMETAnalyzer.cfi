@@ -4,15 +4,15 @@ module jetMETAnalyzer = JetMETAnalyzer
     
     InputTag ICJetsCollectionLabel   = iterativeCone5CaloJets
     InputTag SCJetsCollectionLabel   = sisCone5CaloJets
-//    InputTag CaloJetsCollectionLabel = iterativeCone5CaloJets
+//  InputTag CaloJetsCollectionLabel = iterativeCone5CaloJets
     InputTag PFJetsCollectionLabel   = iterativeCone5PFJets
     InputTag CaloMETCollectionLabel  = met
     InputTag CaloMETNoHFCollectionLabel  = metNoHF
+    InputTag TriggerSummaryLabel     = "TriggerResults::HLT"
 
-        
     untracked bool DoJetAnalysis   = true
-//    untracked bool DoSCJetAnalysis = true
-//    untracked bool DoICJetAnalysis = true
+//  untracked bool DoSCJetAnalysis = true
+//  untracked bool DoICJetAnalysis = true
     PSet jetAnalysis = {  
 	
 	int32 phiBin  = 70
@@ -43,6 +43,22 @@ module jetMETAnalyzer = JetMETAnalyzer
 
     untracked bool DoCaloMETAnalysis = true
     PSet caloMETAnalysis = {  
+
+       	vstring HLTPathsJetMB ={ "HLT_L1Jet15",
+	                    "HLT_Jet30", 
+	                    "HLT_Jet50", 
+                            "HLT_Jet80", 
+	                    "HLT_Jet110", 
+	                    "HLT_Jet180",
+                            "HLT_DiJetAve15",
+                            "HLT_DiJetAve30",
+                            "HLT_DiJetAve50",
+                            "HLT_DiJetAve70",
+                            "HLT_DiJetAve130",
+                            "HLT_DiJetAve220",
+	                    "HLT_ZeroBias",
+                            "HLT_MinBias"}
+
     }
 
     bool OutputMEsInRootFile = false
