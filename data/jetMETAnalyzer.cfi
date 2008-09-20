@@ -8,7 +8,7 @@ module jetMETAnalyzer = JetMETAnalyzer
     InputTag PFJetsCollectionLabel   = iterativeCone5PFJets
     InputTag CaloMETCollectionLabel  = met
     InputTag CaloMETNoHFCollectionLabel  = metNoHF
-    InputTag TriggerSummaryLabel     = "TriggerResults::HLT"
+    InputTag TriggerResultsLabel     = "TriggerResults::HLT"
 
     untracked bool DoJetAnalysis   = true
 //  untracked bool DoSCJetAnalysis = true
