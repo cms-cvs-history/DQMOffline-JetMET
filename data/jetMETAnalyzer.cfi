@@ -15,6 +15,9 @@ module jetMETAnalyzer = JetMETAnalyzer
 //  untracked bool DoICJetAnalysis = true
     PSet jetAnalysis = {  
 	
+	string JetLo="HLT_L1Jet15"
+	string JetHi="HLT_Jet80"
+
 	int32 phiBin  = 70
 	double phiMin = -3.2
 	double phiMax = 3.2
@@ -61,7 +64,7 @@ module jetMETAnalyzer = JetMETAnalyzer
 
     }
 
-    bool OutputMEsInRootFile = false
+    bool OutputMEsInRootFile = true
     string OutputFileName="jetMETMonitoring.root"
 
 }
