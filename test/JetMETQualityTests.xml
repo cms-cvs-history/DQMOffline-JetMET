@@ -10,7 +10,7 @@
    <PARAM name="warning">0.70</PARAM>
 </QTEST>
 
-<LINK name="JetMET/CaloMETAnalyzer/METTask_CaloMETPhi">          <!-- NAME OF HISTOGRAM  -->
+<LINK name="JetMET/MET/*/*METPhi*">          <!-- NAME OF HISTOGRAM  -->
    <TestName activate="true">exampleQTest</TestName>
 </LINK>
 
@@ -24,7 +24,11 @@
    <PARAM name="warning">0.95</PARAM>
 </QTEST>
 
-<LINK name="JetMET/CaloMETAnalyzer/METTask_CaloMETPhi*">          <!-- NAME OF HISTOGRAM  -->
+<LINK name="JetMET/MET/CaloMET/METTask_CaloMETPhi">          <!-- NAME OF HISTOGRAM  -->
+   <TestName activate="true">phiQTest</TestName>
+</LINK>
+
+<LINK name="JetMET/MET/CaloMETNoHF/METTask_CaloMETPhi">          <!-- NAME OF HISTOGRAM  -->
    <TestName activate="true">phiQTest</TestName>
 </LINK>
 
@@ -42,19 +46,19 @@
         <PARAM name="warning">0.90</PARAM>
 </QTEST>
 
-<LINK name="JetMET/CaloMETAnalyzer/METTask_CaloMEx">          <!-- NAME OF HISTOGRAM  -->
+<LINK name="JetMET/MET/CaloMET/METTask_CaloMEx">          <!-- NAME OF HISTOGRAM  -->
    <TestName activate="true">meanQTest</TestName>
 </LINK>
 
-<LINK name="JetMET/CaloMETAnalyzer/METTask_CaloMEy">          <!-- NAME OF HISTOGRAM  -->
+<LINK name="JetMET/MET/CaloMET/METTask_CaloMEy">          <!-- NAME OF HISTOGRAM  -->
    <TestName activate="true">meanQTest</TestName>
 </LINK>
 
-<LINK name="JetMET/CaloMETAnalyzer/METTask_CaloMExNoHF">          <!-- NAME OF HISTOGRAM  -->
+<LINK name="JetMET/MET/CaloMETNoHF/METTask_CaloMEx">          <!-- NAME OF HISTOGRAM  -->
    <TestName activate="true">meanQTest</TestName>
 </LINK>
 
-<LINK name="JetMET/CaloMETAnalyzer/METTask_CaloMEyNoHF">          <!-- NAME OF HISTOGRAM  -->
+<LINK name="JetMET/MET/CaloMETNoHF/METTask_CaloMEy">          <!-- NAME OF HISTOGRAM  -->
    <TestName activate="true">meanQTest</TestName>
 </LINK>
 
