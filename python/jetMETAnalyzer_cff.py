@@ -1,7 +1,7 @@
 import FWCore.ParameterSet.Config as cms
 
-from JetMETCorrections.Configuration.JetPlusTrackCorrections_cff import *
-from JetMETCorrections.Configuration.ZSPJetCorrections152_cff import *
+#from JetMETCorrections.Configuration.JetPlusTrackCorrections_cff import *
+#from JetMETCorrections.Configuration.ZSPJetCorrections152_cff import *
 
 from DQMOffline.JetMET.jetMETAnalyzer_cfi import *
 
