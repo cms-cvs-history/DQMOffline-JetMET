@@ -8,5 +8,7 @@ from DQMOffline.JetMET.jetMETAnalyzer_cfi import *
 # no JPT :
 #jetMETAnalyzerCosmicSequence = cms.Sequence(jetMETAnalyzer)
 # with JPT take this sequence:
-jetMETAnalyzerSequence = cms.Sequence(ZSPJetCorrections*JetPlusTrackCorrections*jetMETAnalyzer)
+#jetMETAnalyzerSequence = cms.Sequence(ZSPJetCorrections*JetPlusTrackCorrections*jetMETAnalyzer)
+# remove JPT from non-cosmic sequence too for now
+jetMETAnalyzerSequence = cms.Sequence(jetMETAnalyzer)
 
