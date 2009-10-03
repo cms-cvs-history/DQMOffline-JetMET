@@ -13,7 +13,7 @@
 //
 // Original Author:  "Frank Chlebana"
 //         Created:  Sun Oct  5 13:57:25 CDT 2008
-// $Id: DataCertificationJetMET.cc,v 1.25 2009/03/30 17:10:27 hatake Exp $
+// $Id: DataCertificationJetMET.cc,v 1.25.4.1 2009/09/24 23:24:27 hatake Exp $
 //
 //
 
@@ -375,7 +375,7 @@ DataCertificationJetMET::endRun(const edm::Run& run, const edm::EventSetup& c)
   //---------
   MonitorElement* mJetDCFL2[10];
   int iL2JetTags=0;
-  for (int itag=0; itag<=NJetAlgo; itag++){
+  for (int itag=0; itag<NJetAlgo; itag++){
     mJetDCFL2[iL2JetTags] = dbe->bookFloat(Jet_Tag_L2[itag]);
     iL2JetTags++;
   }
