@@ -13,7 +13,7 @@
 //
 // Original Author:  "Frank Chlebana"
 //         Created:  Sun Oct  5 13:57:25 CDT 2008
-// $Id: DataCertificationJetMET.cc,v 1.24 2009/03/28 00:19:58 hatake Exp $
+// $Id: DataCertificationJetMET.cc,v 1.25.4.1 2009/09/24 23:24:27 hatake Exp $
 //
 //
 
@@ -375,7 +375,7 @@ DataCertificationJetMET::endRun(const edm::Run& run, const edm::EventSetup& c)
   //---------
   MonitorElement* mJetDCFL2[10];
   int iL2JetTags=0;
-  for (int itag=0; itag<=NJetAlgo; itag++){
+  for (int itag=0; itag<NJetAlgo; itag++){
     mJetDCFL2[iL2JetTags] = dbe->bookFloat(Jet_Tag_L2[itag]);
     iL2JetTags++;
   }
@@ -410,7 +410,7 @@ DataCertificationJetMET::endRun(const edm::Run& run, const edm::EventSetup& c)
 
   //
   // Number of lumi section bins
-  const int nLSBins=500;
+  //const int nLSBins=500;
 
   //-----------------------------
   // Jet DQM Data Certification
@@ -799,20 +799,6 @@ DataCertificationJetMET::endRun(const edm::Run& run, const edm::EventSetup& c)
   //-----------------------------
 
   //
-  //-----
-//   std::cout << "aaa " << std::endl;
-//   MonitorElement * meMETPhi=0;
-//   meMETPhi = new MonitorElement(*(dbe->get("JetMET/CaloMETAnalyzer/METTask_CaloMETPhi")));
-//   const QReport * myQReport = meMETPhi->getQReport("phiQTest"); //get QReport associated to your ME  
-//   std::cout << "aaa " << myQReport << std::endl;    
-//   if(myQReport) {
-//     float qtresult = myQReport->getQTresult(); // get QT result value
-//     int qtstatus   = myQReport->getStatus() ;  // get QT status value (see table below)
-//     std::string qtmessage = myQReport->getMessage() ; // get the whole QT result message
-//     std::cout << "aaa" << qtmessage << " " << qtresult << " " << qtstatus << std::endl;    
-//   }
-
-  //
   // Prepare test histograms
   //
   MonitorElement *meMExy[6];
@@ -840,6 +826,9 @@ DataCertificationJetMET::endRun(const edm::Run& run, const edm::EventSetup& c)
   float qr_JetMET_MExy[6];
   float qr_JetMET_METPhi[3];
   float dc_JetMET[3];
+  qr_JetMET_MExy[0]=qr_JetMET_MExy[1]=qr_JetMET_MExy[2]=qr_JetMET_MExy[3]=qr_JetMET_MExy[4]=qr_JetMET_MExy[5]=-1.;
+  qr_JetMET_METPhi[0]=qr_JetMET_METPhi[1]=qr_JetMET_METPhi[2]=-1.;
+  dc_JetMET[0]=dc_JetMET[1]=dc_JetMET[2]=-1.;
 
   QReport_METPhi[0] = meMETPhi[0]->getQReport("phiQTest"); //get QReport associated to this ME  
   QReport_METPhi[1] = meMETPhi[1]->getQReport("phiQTest"); //get QReport associated to this ME
