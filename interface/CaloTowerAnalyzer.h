@@ -22,9 +22,8 @@ public:
   explicit CaloTowerAnalyzer(const edm::ParameterSet&);
 
   virtual void analyze(const edm::Event&, const edm::EventSetup&);
-  //  virtual void beginJob(const edm::EventSetup&);
+  //  virtual void beginJob();
   virtual void beginRun(const edm::Run& ,const edm::EventSetup&);
-  //virtual void beginJob();
   virtual void endJob();
 
 private:

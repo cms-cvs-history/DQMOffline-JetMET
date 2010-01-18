@@ -1,8 +1,8 @@
 /*
  *  See header file for a description of this class.
  *
- *  $Date: 2009/11/12 17:30:00 $
- *  $Revision: 1.31 $
+ *  $Date: 2009/11/13 12:53:11 $
+ *  $Revision: 1.32 $
  *  \author F. Chlebana - Fermilab
  *          K. Hatakeyama - Rockefeller University
  */
@@ -158,7 +158,7 @@ JetMETAnalyzer::~JetMETAnalyzer() {
 }
 
 // ***********************************************************
-void JetMETAnalyzer::beginJob(edm::EventSetup const& iSetup) {
+void JetMETAnalyzer::beginJob() {
 
   metname = "JetMETAnalyzer";
 
@@ -168,35 +168,35 @@ void JetMETAnalyzer::beginJob(edm::EventSetup const& iSetup) {
   //
   //--- Jet
   if(theJetAnalyzerFlag) { 
-    theSCJetAnalyzer->beginJob(iSetup, dbe); 
-    theAKJetAnalyzer->beginJob(iSetup, dbe);
-    if(theIConeJetAnalyzerFlag) theICJetAnalyzer->beginJob(iSetup, dbe);
+    theSCJetAnalyzer->beginJob(dbe); 
+    theAKJetAnalyzer->beginJob(dbe);
+    if(theIConeJetAnalyzerFlag) theICJetAnalyzer->beginJob(dbe);
   }
   if(theJetCleaningFlag) {
-    theCleanedSCJetAnalyzer->beginJob(iSetup, dbe); 
-    theCleanedAKJetAnalyzer->beginJob(iSetup, dbe);
-     if(theIConeJetAnalyzerFlag)theCleanedICJetAnalyzer->beginJob(iSetup, dbe);
+    theCleanedSCJetAnalyzer->beginJob(dbe); 
+    theCleanedAKJetAnalyzer->beginJob(dbe);
+     if(theIConeJetAnalyzerFlag)theCleanedICJetAnalyzer->beginJob(dbe);
   }
   if(theJetPtAnalyzerFlag ) {
-    thePtAKJetAnalyzer->beginJob(iSetup, dbe);
-    thePtSCJetAnalyzer->beginJob(iSetup, dbe);
-    thePtICJetAnalyzer->beginJob(iSetup, dbe);
+    thePtAKJetAnalyzer->beginJob(dbe);
+    thePtSCJetAnalyzer->beginJob(dbe);
+    thePtICJetAnalyzer->beginJob(dbe);
   }
 
-  if(theJPTJetAnalyzerFlag) theJPTJetAnalyzer->beginJob(iSetup, dbe);
-  if(thePFJetAnalyzerFlag)  thePFJetAnalyzer->beginJob(iSetup, dbe);
+  if(theJPTJetAnalyzerFlag) theJPTJetAnalyzer->beginJob(dbe);
+  if(thePFJetAnalyzerFlag)  thePFJetAnalyzer->beginJob(dbe);
 
   //
   //--- MET
   if(theCaloMETAnalyzerFlag){
-    theCaloMETAnalyzer->beginJob(iSetup, dbe);
-    theCaloMETNoHFAnalyzer->beginJob(iSetup, dbe);
-    theCaloMETHOAnalyzer->beginJob(iSetup, dbe);
-    theCaloMETNoHFHOAnalyzer->beginJob(iSetup, dbe);
+    theCaloMETAnalyzer->beginJob(dbe);
+    theCaloMETNoHFAnalyzer->beginJob(dbe);
+    theCaloMETHOAnalyzer->beginJob(dbe);
+    theCaloMETNoHFHOAnalyzer->beginJob(dbe);
   }
-  if(theTcMETAnalyzerFlag) theTcMETAnalyzer->beginJob(iSetup, dbe);
-  if(thePfMETAnalyzerFlag) thePfMETAnalyzer->beginJob(iSetup, dbe);
-  if(theHTMHTAnalyzerFlag) theHTMHTAnalyzer->beginJob(iSetup, dbe);
+  if(theTcMETAnalyzerFlag) theTcMETAnalyzer->beginJob(dbe);
+  if(thePfMETAnalyzerFlag) thePfMETAnalyzer->beginJob(dbe);
+  if(theHTMHTAnalyzerFlag) theHTMHTAnalyzer->beginJob(dbe);
   
   dbe->setCurrentFolder("JetMET");
   lumisecME = dbe->book1D("lumisec", "lumisec", 500, 0., 500.);

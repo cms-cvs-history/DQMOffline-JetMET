@@ -1,8 +1,8 @@
 /*
  *  See header file for a description of this class.
  *
- *  $Date: 2009/11/08 13:45:20 $
- *  $Revision: 1.1 $
+ *  $Date: 2009/11/12 17:29:36 $
+ *  $Revision: 1.2 $
  *  \author A.Apresyan - Caltech
  */
 
@@ -39,7 +39,7 @@ TcMETAnalyzer::TcMETAnalyzer(const edm::ParameterSet& pSet) {
 // ***********************************************************
 TcMETAnalyzer::~TcMETAnalyzer() { }
 
-void TcMETAnalyzer::beginJob(edm::EventSetup const& iSetup,DQMStore * dbe) {
+void TcMETAnalyzer::beginJob(DQMStore * dbe) {
 
   evtCounter = 0;
   metname = "tcMETAnalyzer";

@@ -5,7 +5,7 @@
  *
  *  base class for all DQM monitor sources
  *
- *  $Date: 2009/03/30 17:10:19 $
+ *  $Date: 2009/06/30 13:48:21 $
  *  $Revision: 1.1 $
  *  \author K. Hatakeyama - The Rockefeller University
  */
@@ -39,7 +39,7 @@ class PFMETAnalyzerBase {
   virtual ~PFMETAnalyzerBase() {}
   
   /// Inizialize parameters for histo binning
-  virtual void beginJob(edm::EventSetup const& iSetup,  DQMStore* dbe)= 0;
+  virtual void beginJob(DQMStore* dbe)= 0;
 
   /// Get the analysis of the muon properties
     void analyze(const edm::Event&, const edm::EventSetup&, 

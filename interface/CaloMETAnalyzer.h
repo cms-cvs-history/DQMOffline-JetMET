@@ -5,8 +5,8 @@
  *
  *  DQM monitoring source for CaloMET
  *
- *  $Date: 2009/10/08 11:03:31 $
- *  $Revision: 1.4 $
+ *  $Date: 2009/10/19 23:51:09 $
+ *  $Revision: 1.5 $
  *  \author F. Chlebana - Fermilab
  *          K. Hatakeyama - Rockefeller University
  */
@@ -46,7 +46,7 @@ class CaloMETAnalyzer : public CaloMETAnalyzerBase {
   virtual ~CaloMETAnalyzer();
 
   /// Inizialize parameters for histo binning
-  void beginJob(edm::EventSetup const& iSetup, DQMStore *dbe);
+  void beginJob(DQMStore *dbe);
 
   /// Finish up a job
   void endJob();

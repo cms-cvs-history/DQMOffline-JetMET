@@ -63,7 +63,7 @@ class JetMETDQMOfflineClient : public edm::EDAnalyzer {
   explicit JetMETDQMOfflineClient(const edm::ParameterSet& );
   virtual ~JetMETDQMOfflineClient();
   
-  virtual void beginJob(const edm::EventSetup&);
+  virtual void beginJob();
   virtual void endJob();
   virtual void beginRun(const edm::Run& run, const edm::EventSetup& c);
   virtual void endRun(const edm::Run& run, const edm::EventSetup& c);

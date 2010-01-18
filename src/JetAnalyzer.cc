@@ -1,8 +1,8 @@
 /*
  *  See header file for a description of this class.
  *
- *  $Date: 2009/10/21 12:50:03 $
- *  $Revision: 1.12 $
+ *  $Date: 2009/11/03 16:46:53 $
+ *  $Revision: 1.13 $
  *  \author F. Chlebana - Fermilab
  */
 
@@ -36,7 +36,7 @@ JetAnalyzer::~JetAnalyzer() { }
 
 
 // ***********************************************************
-void JetAnalyzer::beginJob(edm::EventSetup const& iSetup,DQMStore * dbe) {
+void JetAnalyzer::beginJob(DQMStore * dbe) {
 
   jetname = "jetAnalyzer";
 

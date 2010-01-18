@@ -32,7 +32,7 @@ class DataCertificationJetMET : public edm::EDAnalyzer {
       ~DataCertificationJetMET();
 
    private:
-      virtual void beginJob(const edm::EventSetup&) ;
+      virtual void beginJob() ;
       virtual void analyze(const edm::Event&, const edm::EventSetup&);
       virtual void endJob() ;
 

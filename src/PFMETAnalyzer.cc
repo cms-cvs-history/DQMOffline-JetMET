@@ -1,8 +1,8 @@
 /*
  *  See header file for a description of this class.
  *
- *  $Date: 2009/10/28 13:23:06 $
- *  $Revision: 1.4 $
+ *  $Date: 2009/11/12 17:28:34 $
+ *  $Revision: 1.5 $
  *  \author K. Hatakeyama - Rockefeller University
  *          A.Apresyan - Caltech
  */
@@ -41,7 +41,7 @@ PFMETAnalyzer::PFMETAnalyzer(const edm::ParameterSet& pSet) {
 // ***********************************************************
 PFMETAnalyzer::~PFMETAnalyzer() { }
 
-void PFMETAnalyzer::beginJob(edm::EventSetup const& iSetup,DQMStore * dbe) {
+void PFMETAnalyzer::beginJob(DQMStore * dbe) {
 
   evtCounter = 0;
   metname = "pfMETAnalyzer";

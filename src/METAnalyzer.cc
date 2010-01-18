@@ -1,8 +1,8 @@
 /*
  *  See header file for a description of this class.
  *
- *  $Date: 2009/06/30 13:39:37 $
- *  $Revision: 1.2 $
+ *  $Date: 2009/10/08 10:14:36 $
+ *  $Revision: 1.3 $
  *  \author K. Hatakeyama - Rockefeller University
  */
 
@@ -35,7 +35,7 @@ METAnalyzer::METAnalyzer(const edm::ParameterSet& pSet) {
 // ***********************************************************
 METAnalyzer::~METAnalyzer() { }
 
-void METAnalyzer::beginJob(edm::EventSetup const& iSetup,DQMStore * dbe) {
+void METAnalyzer::beginJob(DQMStore * dbe) {
 
   evtCounter = 0;
   metname = "metAnalyzer";

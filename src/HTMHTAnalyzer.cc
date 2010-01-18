@@ -1,8 +1,8 @@
 /*
  *  See header file for a description of this class.
  *
- *  $Date: 2009/06/30 13:36:24 $
- *  $Revision: 1.2 $
+ *  $Date: 2009/10/08 10:14:36 $
+ *  $Revision: 1.3 $
  *  \author K. Hatakeyama - Rockefeller University
  */
 
@@ -38,7 +38,7 @@ HTMHTAnalyzer::HTMHTAnalyzer(const edm::ParameterSet& pSet) {
 // ***********************************************************
 HTMHTAnalyzer::~HTMHTAnalyzer() { }
 
-void HTMHTAnalyzer::beginJob(edm::EventSetup const& iSetup,DQMStore * dbe) {
+void HTMHTAnalyzer::beginJob(DQMStore * dbe) {
 
   evtCounter = 0;
   metname = "HTMHTAnalyzer";

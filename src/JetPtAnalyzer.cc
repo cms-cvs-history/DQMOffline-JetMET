@@ -32,7 +32,7 @@ JetPtAnalyzer::~JetPtAnalyzer() { }
 
 
 // ***********************************************************
-void JetPtAnalyzer::beginJob(edm::EventSetup const& iSetup,DQMStore * dbe) {
+void JetPtAnalyzer::beginJob(DQMStore * dbe) {
 
   jetname = "jetPtAnalyzer";
 

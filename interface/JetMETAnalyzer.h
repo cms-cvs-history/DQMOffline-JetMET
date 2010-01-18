@@ -6,8 +6,8 @@
  *
  *  DQM jetMET analysis monitoring
  *
- *  $Date: 2009/11/08 14:33:01 $
- *  $Revision: 1.5 $
+ *  $Date: 2009/11/13 12:53:12 $
+ *  $Revision: 1.6 $
  *  \author F. Chlebana - Fermilab
  *          K. Hatakeyama - Rockefeller University
  */
@@ -49,7 +49,7 @@ class JetMETAnalyzer : public edm::EDAnalyzer {
   virtual ~JetMETAnalyzer();
   
   /// Inizialize parameters for histo binning
-  void beginJob(edm::EventSetup const& iSetup);
+  void beginJob();
 
   /// Get the analysis
   void analyze(const edm::Event&, const edm::EventSetup&);

@@ -124,17 +124,20 @@ JPTJetAnalyzer::JPTJetAnalyzer(const edm::ParameterSet& config)
 JPTJetAnalyzer::~JPTJetAnalyzer()
 {}
 
-void JPTJetAnalyzer::beginJob(const edm::EventSetup& eventSetup, DQMStore* dqmStore)
+void JPTJetAnalyzer::beginJob(DQMStore* dqmStore)
 {
-  //get JPT corrector
-  const JetCorrector* corrector = JetCorrector::getJetCorrector(jptCorrectorName_,eventSetup);
-  if (!corrector) edm::LogError(messageLoggerCatregory) << "Failed to get corrector with name " << jptCorrectorName_ << "from the EventSetup";
-  jptCorrector_ = dynamic_cast<const JetPlusTrackCorrector*>(corrector);
-  if (!jptCorrector_) edm::LogError(messageLoggerCatregory) << "Corrector with name " << jptCorrectorName_ << " is not a JetPlusTrackCorrector";
-  
   //book histograms
   dqmStore->setCurrentFolder(histogramPath_);
   bookHistograms(dqmStore);
+}
+
+void JPTJetAnalyzer::beginRun(const edm::Run& run, const edm::EventSetup& setup)
+{
+  //get JPT corrector
+  const JetCorrector* corrector = JetCorrector::getJetCorrector(jptCorrectorName_,setup);
+  if (!corrector) edm::LogError(messageLoggerCatregory) << "Failed to get corrector with name " << jptCorrectorName_ << "from the EventSetup";
+  jptCorrector_ = dynamic_cast<const JetPlusTrackCorrector*>(corrector);
+  if (!jptCorrector_) edm::LogError(messageLoggerCatregory) << "Corrector with name " << jptCorrectorName_ << " is not a JetPlusTrackCorrector";
 }
 
 void JPTJetAnalyzer::analyze(const edm::Event& event, const edm::EventSetup& eventSetup, const reco::CaloJet& jptCorrectedJet)
