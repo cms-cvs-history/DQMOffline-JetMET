@@ -1,8 +1,8 @@
 /*
  *  See header file for a description of this class.
  *
- *  $Date: 2010/01/25 08:24:16 $
- *  $Revision: 1.39 $
+ *  $Date: 2010/01/25 23:07:49 $
+ *  $Revision: 1.40 $
  *  \author F. Chlebana - Fermilab
  *          K. Hatakeyama - Rockefeller University
  */
@@ -297,15 +297,14 @@ void JetMETAnalyzer::beginRun(const edm::Run& iRun, const edm::EventSetup& iSetu
   if (hltConfig_.size()){
     dbe->setCurrentFolder("JetMET");
     hltpathME = dbe->book1D("hltpath", "hltpath", 300, 0., 300.);
+    for (unsigned int j=0; j!=hltConfig_.size(); ++j) {
+      hltpathME->setBinLabel(j+1,hltConfig_.triggerName(j));
+    }
     physdecME = dbe->book1D("physdec", "physdec", 2,   0., 2.);
+    physdecME->setBinLabel(1,"All Events");
+    //physdecME->setBinLabel(2,"PhysicsDeclared");
   }
 
-  for (unsigned int j=0; j!=hltConfig_.size(); ++j) {
-    hltpathME->setBinLabel(j+1,hltConfig_.triggerName(j));
-  }
-
-  physdecME->setBinLabel(1,"All Events");
-  //physdecME->setBinLabel(2,"PhysicsDeclared");
   //
   //--- Jet
 
