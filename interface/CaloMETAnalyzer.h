@@ -5,8 +5,8 @@
  *
  *  DQM monitoring source for CaloMET
  *
- *  $Date: 2010/01/27 01:43:27 $
- *  $Revision: 1.13 $
+ *  $Date: 2010/01/18 21:04:05 $
+ *  $Revision: 1.11 $
  *  \author F. Chlebana - Fermilab
  *          K. Hatakeyama - Rockefeller University
  */
@@ -115,20 +115,17 @@ class CaloMETAnalyzer : public CaloMETAnalyzerBase {
   std::string _hlt_Muon;
   std::string _hlt_PhysDec;
 
-  std::vector<unsigned > _techTrigsAND;
-  std::vector<unsigned > _techTrigsOR;
-  std::vector<unsigned > _techTrigsNOT;
+  std::vector<unsigned > _techTrigs;
 
   bool _doPVCheck;
   bool _doHLTPhysicsOn;
 
   bool     _tightBHFiltering;
-  int      _tightJetIDFiltering;
+  unsigned _tightJetIDFiltering;
   bool     _tightHcalFiltering;
 
   int _nvtx_min;
   int _nvtxtrks_min;
-  int _vtxndof_min;
   double _vtxchi2_max;
   double _vtxz_max;
 
