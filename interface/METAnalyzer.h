@@ -6,8 +6,8 @@
  *
  *  DQM monitoring source for MET (Mu corrected/TcMET)
  *
- *  $Date: 2010/01/27 01:43:38 $
- *  $Revision: 1.10 $
+ *  $Date: 2010/01/18 21:04:05 $
+ *  $Revision: 1.8 $
  *  \author A.Apresyan - Caltech
  */
 
@@ -132,20 +132,17 @@ class METAnalyzer : public METAnalyzerBase {
   std::string _hlt_Muon;
   std::string _hlt_PhysDec;
 
-  std::vector<unsigned > _techTrigsAND;
-  std::vector<unsigned > _techTrigsOR;
-  std::vector<unsigned > _techTrigsNOT;
+  std::vector<unsigned > _techTrigs;
 
   bool _doPVCheck;
   bool _doHLTPhysicsOn;
 
   bool     _tightBHFiltering;
-  int      _tightJetIDFiltering;
+  unsigned _tightJetIDFiltering;
   bool     _tightHcalFiltering;
 
   int _nvtx_min;
   int _nvtxtrks_min;
-  int _vtxndof_min;
   double _vtxchi2_max;
   double _vtxz_max;
   
