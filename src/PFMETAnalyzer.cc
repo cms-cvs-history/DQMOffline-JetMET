@@ -1,8 +1,8 @@
 /*
  *  See header file for a description of this class.
  *
- *  $Date: 2010/01/27 22:20:28 $
- *  $Revision: 1.16 $
+ *  $Date: 2010/01/25 08:22:41 $
+ *  $Revision: 1.13 $
  *  \author K. Hatakeyama - Rockefeller University
  *          A.Apresyan - Caltech
  */
@@ -61,22 +61,19 @@ void PFMETAnalyzer::beginJob(DQMStore * dbe) {
   _hlt_Muon      = parameters.getParameter<std::string>("HLT_Muon");
   _hlt_PhysDec   = parameters.getParameter<std::string>("HLT_PhysDec");
 
-  _techTrigsAND  = parameters.getParameter<std::vector<unsigned > >("techTrigsAND");
-  _techTrigsOR   = parameters.getParameter<std::vector<unsigned > >("techTrigsOR");
-  _techTrigsNOT  = parameters.getParameter<std::vector<unsigned > >("techTrigsNOT");
+  _techTrigs     = parameters.getParameter<std::vector<unsigned > >("techTrigs");
 
   _doPVCheck          = parameters.getParameter<bool>("doPrimaryVertexCheck");
   _doHLTPhysicsOn     = parameters.getParameter<bool>("doHLTPhysicsOn");
 
   _tightBHFiltering     = parameters.getParameter<bool>("tightBHFiltering");
-  _tightJetIDFiltering  = parameters.getParameter<int>("tightJetIDFiltering");
+  _tightJetIDFiltering  = parameters.getParameter<unsigned>("tightJetIDFiltering");
   _tightHcalFiltering   = parameters.getParameter<bool>("tightHcalFiltering");
 
   //Vertex requirements
   if (_doPVCheck) {
     _nvtx_min        = parameters.getParameter<int>("nvtx_min");
     _nvtxtrks_min    = parameters.getParameter<int>("nvtxtrks_min");
-    _vtxndof_min     = parameters.getParameter<int>("vtxndof_min");
     _vtxchi2_max     = parameters.getParameter<double>("vtxchi2_max");
     _vtxz_max        = parameters.getParameter<double>("vtxz_max");
   }
@@ -128,7 +125,6 @@ void PFMETAnalyzer::beginJob(DQMStore * dbe) {
   _FolderNames.push_back("JetIDTight");
   _FolderNames.push_back("BeamHaloIDTightPass");
   _FolderNames.push_back("BeamHaloIDLoosePass");
-  _FolderNames.push_back("Triggers");
   _FolderNames.push_back("PV");
 
   for (std::vector<std::string>::const_iterator ic = _FolderNames.begin(); 
@@ -268,21 +264,21 @@ void PFMETAnalyzer::beginRun(const edm::Run& iRun, const edm::EventSetup& iSetup
   //
   //--- htlConfig_
   
-  //   hltConfig_.init(processname_);
-  //   if (!hltConfig_.init(processname_)) {
-  //     processname_ = "FU";
-  //     if (!hltConfig_.init(processname_)){
-  //       LogDebug("PFMETAnalyzer") << "HLTConfigProvider failed to initialize.";
-  //     }
-  //   }
+//   hltConfig_.init(processname_);
+//   if (!hltConfig_.init(processname_)) {
+//     processname_ = "FU";
+//     if (!hltConfig_.init(processname_)){
+//       LogDebug("PFMETAnalyzer") << "HLTConfigProvider failed to initialize.";
+//     }
+//   }
 
-  //   if (_verbose) std::cout << hltConfig_.triggerIndex(_hlt_HighPtJet) << std::endl;
-  //   if (_verbose) std::cout << hltConfig_.triggerIndex(_hlt_LowPtJet)  << std::endl;
-  //   if (_verbose) std::cout << hltConfig_.triggerIndex(_hlt_HighMET)   << std::endl;
-  //   if (_verbose) std::cout << hltConfig_.triggerIndex(_hlt_LowMET)    << std::endl;
-  //   if (_verbose) std::cout << hltConfig_.triggerIndex(_hlt_Ele)       << std::endl;
-  //   if (_verbose) std::cout << hltConfig_.triggerIndex(_hlt_Muon)      << std::endl;
-  //   if (_verbose) std::cout << hltConfig_.triggerIndex(_hlt_PhysDec)   << std::endl;
+//   if (_verbose) std::cout << hltConfig_.triggerIndex(_hlt_HighPtJet) << std::endl;
+//   if (_verbose) std::cout << hltConfig_.triggerIndex(_hlt_LowPtJet)  << std::endl;
+//   if (_verbose) std::cout << hltConfig_.triggerIndex(_hlt_HighMET)   << std::endl;
+//   if (_verbose) std::cout << hltConfig_.triggerIndex(_hlt_LowMET)    << std::endl;
+//   if (_verbose) std::cout << hltConfig_.triggerIndex(_hlt_Ele)       << std::endl;
+//   if (_verbose) std::cout << hltConfig_.triggerIndex(_hlt_Muon)      << std::endl;
+//   if (_verbose) std::cout << hltConfig_.triggerIndex(_hlt_PhysDec)   << std::endl;
 
 }
 
@@ -550,7 +546,7 @@ void PFMETAnalyzer::analyze(const edm::Event& iEvent, const edm::EventSetup& iSe
       else {
 	if (cal->emEnergyFraction()<=-0.9) bJetIDLoose=false; 
 	if (cal->pt()>80.){
-	  if (cal->emEnergyFraction()>= 1.0) bJetIDLoose=false; 
+	if (cal->emEnergyFraction()>= 1.0) bJetIDLoose=false; 
 	}
       } // forward vs non-forward
     }   // pt>10 GeV/c
@@ -585,17 +581,17 @@ void PFMETAnalyzer::analyze(const edm::Event& iEvent, const edm::EventSetup& iSe
 	if (cal->pt()>=50. && cal->pt()< 80. && cal->emEnergyFraction()<=-0.2) bJetIDTight=false; 
 	if (cal->pt()>=80. && cal->pt()<340. && cal->emEnergyFraction()<=-0.1) bJetIDTight=false; 
 	if (cal->pt()>=340.                  && cal->emEnergyFraction()<=-0.1 
-	    && cal->emEnergyFraction()>=0.95) bJetIDTight=false; 
+                                             && cal->emEnergyFraction()>=0.95) bJetIDTight=false; 
       }
       //
       // for 3.25<|eta|
       else if (fabs(cal->eta())>=3.25){
 	if (cal->pt()< 50.                   && cal->emEnergyFraction()<=-0.3
-	    && cal->emEnergyFraction()>=0.90) bJetIDTight=false; 
+                                             && cal->emEnergyFraction()>=0.90) bJetIDTight=false; 
 	if (cal->pt()>=50. && cal->pt()<130. && cal->emEnergyFraction()<=-0.2
-	    && cal->emEnergyFraction()>=0.80) bJetIDTight=false; 
+                                             && cal->emEnergyFraction()>=0.80) bJetIDTight=false; 
 	if (cal->pt()>=130.                  && cal->emEnergyFraction()<=-0.1 
-	    && cal->emEnergyFraction()>=0.70) bJetIDTight=false; 
+                                             && cal->emEnergyFraction()>=0.70) bJetIDTight=false; 
       }
     }   // pt>10 GeV/c
   }     // calor-jets loop
@@ -619,15 +615,15 @@ void PFMETAnalyzer::analyze(const edm::Event& iEvent, const edm::EventSetup& iSe
 
   if(!TheBeamHaloSummary.isValid()) {
 
-    const BeamHaloSummary TheSummary = (*TheBeamHaloSummary.product() );
+  const BeamHaloSummary TheSummary = (*TheBeamHaloSummary.product() );
 
-    if( !TheSummary.EcalLooseHaloId()  && !TheSummary.HcalLooseHaloId() && 
-	!TheSummary.CSCLooseHaloId()   && !TheSummary.GlobalLooseHaloId() )
-      bBeamHaloIDLoosePass = false;
+  if( !TheSummary.EcalLooseHaloId()  && !TheSummary.HcalLooseHaloId() && 
+      !TheSummary.CSCLooseHaloId()   && !TheSummary.GlobalLooseHaloId() )
+    bBeamHaloIDLoosePass = false;
 
-    if( !TheSummary.EcalTightHaloId()  && !TheSummary.HcalTightHaloId() && 
-	!TheSummary.CSCTightHaloId()   && !TheSummary.GlobalTightHaloId() )
-      bBeamHaloIDTightPass = false;
+  if( !TheSummary.EcalTightHaloId()  && !TheSummary.HcalTightHaloId() && 
+      !TheSummary.CSCTightHaloId()   && !TheSummary.GlobalTightHaloId() )
+    bBeamHaloIDTightPass = false;
 
   }
 
@@ -643,50 +639,37 @@ void PFMETAnalyzer::analyze(const edm::Event& iEvent, const edm::EventSetup& iSe
       VertexCollection vertexCollection = *(vertexHandle.product());
       int vertex_number     = vertexCollection.size();
       VertexCollection::const_iterator v = vertexCollection.begin();
-      double vertex_chi2    = v->normalizedChi2();
+      double vertex_chi2    = v->normalizedChi2(); //v->chi2();
       //double vertex_d0      = sqrt(v->x()*v->x()+v->y()*v->y());
-      //double vertex_numTrks = v->tracksSize();
-      double vertex_ndof    = v->ndof();
-      bool   fakeVtx        = v->isFake();
+      double vertex_numTrks = v->tracksSize();
       double vertex_sumTrks = 0.0;
       double vertex_Z       = v->z();
       for (Vertex::trackRef_iterator vertex_curTrack = v->tracks_begin(); vertex_curTrack!=v->tracks_end(); vertex_curTrack++) {
 	vertex_sumTrks += (*vertex_curTrack)->pt();
       }
       
-      if (  !fakeVtx
-	    && vertex_number>=_nvtx_min
-	    //&& vertex_numTrks>_nvtxtrks_min
-	    && vertex_ndof   >_vtxndof_min
-	    && vertex_chi2   <_vtxchi2_max
-	    && fabs(vertex_Z)<_vtxz_max ) bPrimaryVertex = true;
+      if (vertex_number>=_nvtx_min
+	  && vertex_numTrks>=_nvtxtrks_min
+	  && vertex_chi2   <_vtxchi2_max
+	  && fabs(vertex_Z)<_vtxz_max ) bPrimaryVertex = true;
     }
   }
+
   // ==========================================================
-  
+
   edm::Handle< L1GlobalTriggerReadoutRecord > gtReadoutRecord;
   iEvent.getByLabel( edm::InputTag("gtDigis"), gtReadoutRecord);
 
   const TechnicalTriggerWord&  technicalTriggerWordBeforeMask = gtReadoutRecord->technicalTriggerWord();
+  std::vector<bool> bTechTrigResults;
+  bTechTrigResults.resize(_techTrigs.size());
 
-  bool bTechTriggers    = true;
-  bool bTechTriggersAND = true;
-  bool bTechTriggersOR  = false;
-  bool bTechTriggersNOT = false;
+  bool bTechTriggers = true;
 
-  for (unsigned ttr = 0; ttr != _techTrigsAND.size(); ttr++) {
-    bTechTriggersAND = bTechTriggersAND && technicalTriggerWordBeforeMask.at(_techTrigsAND.at(ttr));
+  for (unsigned ttr = 0; ttr != _techTrigs.size(); ttr++) {
+    bTechTrigResults.at(ttr) = technicalTriggerWordBeforeMask.at(_techTrigs.at(ttr));
+    bTechTriggers = bTechTriggers && bTechTrigResults.at(ttr);
   }
-
-  for (unsigned ttr = 0; ttr != _techTrigsOR.size(); ttr++) {
-    bTechTriggersOR = bTechTriggersOR || technicalTriggerWordBeforeMask.at(_techTrigsOR.at(ttr));
-  }
-
-  for (unsigned ttr = 0; ttr != _techTrigsNOT.size(); ttr++) {
-    bTechTriggersNOT = bTechTriggersNOT || technicalTriggerWordBeforeMask.at(_techTrigsNOT.at(ttr));
-  }
-
-  bTechTriggers = bTechTriggersAND && bTechTriggersOR && !bTechTriggersNOT;
 
   // ==========================================================
   // Reconstructed MET Information - fill MonitorElements
@@ -700,11 +683,8 @@ void PFMETAnalyzer::analyze(const edm::Event& iEvent, const edm::EventSetup& iSe
 
   if      (_tightHcalFiltering)     bHcalNoise  = bHcalNoiseFilterTight;
   if      (_tightBHFiltering)       bBeamHaloID = bBeamHaloIDTightPass;
-
-  if      (_tightJetIDFiltering==1)  bJetID      = bJetIDMinimal;
-  else if (_tightJetIDFiltering==2)  bJetID      = bJetIDLoose;
-  else if (_tightJetIDFiltering==3)  bJetID      = bJetIDTight;
-  else if (_tightJetIDFiltering==-1) bJetID      = true;
+  if      (_tightJetIDFiltering==1) bJetID      = bJetIDLoose;
+  else if (_tightJetIDFiltering==2) bJetID      = bJetIDTight;
 
   bool bBasicCleanup = bTechTriggers && bPrimaryVertex && bPhysicsDeclared;
   bool bExtraCleanup = bBasicCleanup && bHcalNoise && bJetID && bBeamHaloID;
@@ -729,54 +709,54 @@ void PFMETAnalyzer::analyze(const edm::Event& iEvent, const edm::EventSetup& iSe
     }
   }
 }
-  
-// ***********************************************************
-void PFMETAnalyzer::validateMET(const reco::PFMET& pfmet, 
-				edm::Handle<edm::View<PFCandidate> > pfCandidates)
-{          
-  double sumEx = 0;
-  double sumEy = 0;
-  double sumEt = 0;
+
+  // ***********************************************************
+  void PFMETAnalyzer::validateMET(const reco::PFMET& pfmet, 
+				    edm::Handle<edm::View<PFCandidate> > pfCandidates)
+    {          
+      double sumEx = 0;
+      double sumEy = 0;
+      double sumEt = 0;
       
-  for( unsigned i=0; i<pfCandidates->size(); i++ ) {
+      for( unsigned i=0; i<pfCandidates->size(); i++ ) {
 	
-    const reco::PFCandidate& cand = (*pfCandidates)[i];
+	const reco::PFCandidate& cand = (*pfCandidates)[i];
 	
-    double E = cand.energy();
+	double E = cand.energy();
 	
-    /// HF calibration factor (in 31X applied by PFProducer)
-    // 	if( cand.particleId()==PFCandidate::h_HF || 
-    // 	    cand.particleId()==PFCandidate::egamma_HF )
-    // 	  E *= hfCalibFactor_;
+	/// HF calibration factor (in 31X applied by PFProducer)
+// 	if( cand.particleId()==PFCandidate::h_HF || 
+// 	    cand.particleId()==PFCandidate::egamma_HF )
+// 	  E *= hfCalibFactor_;
 	
-    double phi = cand.phi();
-    double cosphi = cos(phi);
-    double sinphi = sin(phi);
+	double phi = cand.phi();
+	double cosphi = cos(phi);
+	double sinphi = sin(phi);
 	
-    double theta = cand.theta();
-    double sintheta = sin(theta);
+	double theta = cand.theta();
+	double sintheta = sin(theta);
 	
-    double et = E*sintheta;
-    double ex = et*cosphi;
-    double ey = et*sinphi;
+	double et = E*sintheta;
+	double ex = et*cosphi;
+	double ey = et*sinphi;
 	
-    sumEx += ex;
-    sumEy += ey;
-    sumEt += et;
-  }
+	sumEx += ex;
+	sumEy += ey;
+	sumEt += et;
+      }
       
-  double Et = sqrt( sumEx*sumEx + sumEy*sumEy);
-  XYZTLorentzVector missingEt( -sumEx, -sumEy, 0, Et);
+      double Et = sqrt( sumEx*sumEx + sumEy*sumEy);
+      XYZTLorentzVector missingEt( -sumEx, -sumEy, 0, Et);
       
-  if(_verbose) 
-    if (sumEt!=pfmet.sumEt() || sumEx!=pfmet.px() || sumEy!=pfmet.py() || missingEt.T()!=pfmet.pt() )	
-      {
+      if(_verbose) 
+	if (sumEt!=pfmet.sumEt() || sumEx!=pfmet.px() || sumEy!=pfmet.py() || missingEt.T()!=pfmet.pt() )	
+	{
 	cout<<"PFSumEt: " << sumEt         <<", "<<"PFMETBlock: "<<pfmet.pt()<<endl;
 	cout<<"PFMET: "   << missingEt.T() <<", "<<"PFMETBlock: "<<pfmet.pt()<<endl;
 	cout<<"PFMETx: "  << missingEt.X() <<", "<<"PFMETBlockx: "<<pfmet.pt()<<endl;
 	cout<<"PFMETy: "  << missingEt.Y() <<", "<<"PFMETBlocky: "<<pfmet.pt()<<endl;
       }
-}
+    }
 
 // ***********************************************************
 void PFMETAnalyzer::fillMESet(const edm::Event& iEvent, std::string DirName, 
@@ -800,8 +780,8 @@ void PFMETAnalyzer::fillMESet(const edm::Event& iEvent, std::string DirName,
 
 // ***********************************************************
 void PFMETAnalyzer::fillMonitorElement(const edm::Event& iEvent, std::string DirName, 
-				       std::string TriggerTypeName, 
-				       const reco::PFMET& pfmet, bool bLumiSecPlot)
+					 std::string TriggerTypeName, 
+					 const reco::PFMET& pfmet, bool bLumiSecPlot)
 {
 
   if (TriggerTypeName=="HighPtJet") {
@@ -826,7 +806,7 @@ void PFMETAnalyzer::fillMonitorElement(const edm::Event& iEvent, std::string Dir
     if (!selectPhysicsDeclaredEvent(iEvent)) return;
   }
   
-  // Reconstructed MET Information
+// Reconstructed MET Information
   double pfSumET  = pfmet.sumEt();
   double pfMETSig = pfmet.mEtSig();
   double pfEz     = pfmet.e_longitudinal();
@@ -940,7 +920,7 @@ bool PFMETAnalyzer::selectWElectronEvent(const edm::Event& iEvent){
 
   /*
     W-electron event selection comes here
-  */
+   */
 
   return return_value;
 
@@ -953,7 +933,7 @@ bool PFMETAnalyzer::selectWMuonEvent(const edm::Event& iEvent){
 
   /*
     W-muon event selection comes here
-  */
+   */
 
   return return_value;
 
@@ -966,7 +946,7 @@ bool PFMETAnalyzer::selectPhysicsDeclaredEvent(const edm::Event& iEvent){
 
   /*
     PhysicsDeclared event selection comes here
-  */
+   */
 
   return return_value;
 
