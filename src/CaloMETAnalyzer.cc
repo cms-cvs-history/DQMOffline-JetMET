@@ -1,8 +1,8 @@
 /*
  *  See header file for a description of this class.
  *
- *  $Date: 2010/01/25 08:21:10 $
- *  $Revision: 1.27 $
+ *  $Date: 2010/01/25 23:08:24 $
+ *  $Revision: 1.28 $
  *  \author F. Chlebana - Fermilab
  *          K. Hatakeyama - Rockefeller University
  */
@@ -14,6 +14,7 @@
 //#include "DataFormats/METReco/interface/CaloMETCollection.h"
 
 #include "FWCore/MessageLogger/interface/MessageLogger.h"
+#include "FWCore/Common/interface/TriggerNames.h"
 
 #include "DataFormats/CaloTowers/interface/CaloTowerCollection.h"
 #include "DataFormats/CaloTowers/interface/CaloTowerDetId.h"
@@ -465,8 +466,7 @@ void CaloMETAnalyzer::analyze(const edm::Event& iEvent, const edm::EventSetup& i
     //
     //
     // If index=ntrigs, this HLT trigger doesn't exist in the HLT table for this data.
-    edm::TriggerNames triggerNames; // TriggerNames class
-    triggerNames.init(triggerResults);
+    const edm::TriggerNames & triggerNames = iEvent.triggerNames(triggerResults);
     
     //
     //

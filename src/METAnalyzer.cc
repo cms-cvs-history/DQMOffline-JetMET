@@ -1,14 +1,15 @@
 /*
  *  See header file for a description of this class.
  *
- *  $Date: 2010/01/25 08:21:34 $
- *  $Revision: 1.14 $
+ *  $Date: 2010/01/25 23:07:54 $
+ *  $Revision: 1.15 $
  *  \author A.Apresyan - Caltech
  *          K.Hatakeyama - Baylor
  */
 
 #include "DQMOffline/JetMET/interface/METAnalyzer.h"
 #include "DataFormats/Common/interface/Handle.h"
+#include "FWCore/Common/interface/TriggerNames.h"
 
 #include "DataFormats/Math/interface/LorentzVector.h"
 
@@ -420,8 +421,7 @@ void METAnalyzer::analyze(const edm::Event& iEvent, const edm::EventSetup& iSetu
     //
     //
     // If index=ntrigs, this HLT trigger doesn't exist in the HLT table for this data.
-    edm::TriggerNames triggerNames; // TriggerNames class
-    triggerNames.init(triggerResults);
+    const edm::TriggerNames & triggerNames = iEvent.triggerNames(triggerResults);
     
     //
     //

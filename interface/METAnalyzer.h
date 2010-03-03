@@ -6,8 +6,8 @@
  *
  *  DQM monitoring source for MET (Mu corrected/TcMET)
  *
- *  $Date: 2010/01/18 21:04:05 $
- *  $Revision: 1.8 $
+ *  $Date: 2010/01/25 08:21:56 $
+ *  $Revision: 1.9 $
  *  \author A.Apresyan - Caltech
  */
 
@@ -25,7 +25,6 @@
 #include "DQMServices/Core/interface/MonitorElement.h"
 
 #include "DataFormats/HLTReco/interface/TriggerObject.h"
-#include "FWCore/Framework/interface/TriggerNames.h"
 #include "DataFormats/Common/interface/TriggerResults.h"
 #include "DataFormats/HLTReco/interface/TriggerEvent.h"
 #include "DataFormats/HLTReco/interface/TriggerTypeDefs.h"

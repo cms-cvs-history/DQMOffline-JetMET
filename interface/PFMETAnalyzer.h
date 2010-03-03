@@ -6,8 +6,8 @@
  *
  *  DQM monitoring source for PFMET
  *
- *  $Date: 2010/01/18 21:04:05 $
- *  $Revision: 1.8 $
+ *  $Date: 2010/01/25 08:22:32 $
+ *  $Revision: 1.9 $
  *  \author K. Hatakeyama - Rockefeller University
  *          A.Apresyan - Caltech 
  */
@@ -29,7 +29,6 @@
 #include <DataFormats/ParticleFlowCandidate/interface/PFCandidate.h>
 
 #include "DataFormats/HLTReco/interface/TriggerObject.h"
-#include "FWCore/Framework/interface/TriggerNames.h"
 #include "DataFormats/Common/interface/TriggerResults.h"
 #include "DataFormats/HLTReco/interface/TriggerEvent.h"
 #include "DataFormats/HLTReco/interface/TriggerTypeDefs.h"

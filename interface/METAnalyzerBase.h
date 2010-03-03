@@ -5,8 +5,8 @@
  *
  *  base class for all DQM monitor sources
  *
- *  $Date: 2010/02/17 17:49:45 $
- *  $Revision: 1.5 $
+ *  $Date: 2010/03/03 19:16:03 $
+ *  $Revision: 1.4.2.1 $
  *  \author K. Hatakeyama - The Rockefeller University
  */
 
@@ -25,7 +25,6 @@
 #include "DataFormats/METReco/interface/METFwd.h"
 //
 #include "DataFormats/HLTReco/interface/TriggerObject.h"
-#include "FWCore/Common/interface/TriggerNames.h"
 #include "DataFormats/Common/interface/TriggerResults.h"
 #include "DataFormats/HLTReco/interface/TriggerEvent.h"
 #include "DataFormats/HLTReco/interface/TriggerTypeDefs.h"
