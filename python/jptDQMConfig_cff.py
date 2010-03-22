@@ -70,14 +70,14 @@ sOverNBins = int(sOverNMax/sOverNBinSize)
 drBins = int(drMax/drBinSize)
 n90Max = n90Bins
 
-import JetMETCorrections.Configuration.JetPlusTrackCorrections_cff
-JetPlusTrackZSPCorrectorAntiKt5ForDQM = JetMETCorrections.Configuration.JetPlusTrackCorrections_cff.JetPlusTrackZSPCorrectorAntiKt5.clone()
+import RecoJets.JetPlusTracks.JetPlusTrackCorrections_cff
+JetPlusTrackZSPCorrectorAntiKt5ForDQM = RecoJets.JetPlusTracks.JetPlusTrackCorrections_cff.JetPlusTrackZSPCorJetAntiKt5.clone()
 JetPlusTrackZSPCorrectorAntiKt5ForDQM.ElectronIds = 'eidTight'
-JetPlusTrackZSPCorrectorAntiKt5ForDQM.label = 'JetPlusTrackZSPCorrectorAntiKt5ForDQM'
+JetPlusTrackZSPCorrectorAntiKt5ForDQM.label = cms.InputTag('JetPlusTrackZSPCorrectorAntiKt5ForDQM')
 JetPlusTrackZSPCorrectorAntiKt5ForDQM.JetTracksAssociationAtVertex = cms.InputTag('ak5JetTracksAssociatorAtVertex')
 JetPlusTrackZSPCorrectorAntiKt5ForDQM.JetTracksAssociationAtCaloFace = cms.InputTag('ak5JetTracksAssociatorAtCaloFace')
-from JetMETCorrections.Configuration.ZSPJetCorrections219_cff import *
-from JetMETCorrections.Configuration.JetPlusTrackCorrections_cff import *
+from RecoJets.JetPlusTracks.ZSPJetCorrections332_cff import *
+from RecoJets.JetPlusTracks.JetPlusTrackCorrections_cff import *
 
 import RecoJets.JetProducers.JetIDParams_cfi
 theJetIDParams = RecoJets.JetProducers.JetIDParams_cfi.JetIDParams.clone()
