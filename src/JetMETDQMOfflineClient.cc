@@ -166,7 +166,8 @@ void JetMETDQMOfflineClient::runClient_()
 	  if (verbose_) std::cout << "making rate plot done" << std::endl;      
 
 	  hMETRate      = dbe_->book1D(METMEName+"Rate",tMETRate);
-	  hMETRate->setAxisTitle("MET Threshold [GeV]",1);
+ 	  hMETRate->setTitle(METMEName+" Rate");
+ 	  hMETRate->setAxisTitle("MET Threshold [GeV]",1);
 	  if (verbose_) std::cout << "booking rate plot ME done" << std::endl;      
 
 	} // me->getRootObject()
@@ -196,6 +197,7 @@ void JetMETDQMOfflineClient::runClient_()
 
     vector<string>::const_iterator cii;
     for(cii=getMEs.begin(); cii!=getMEs.end(); cii++) {
+      if ((*cii).find("_binom")!=string::npos) continue;
       if ((*cii).find("JIDPassFractionVS")!=string::npos){  // Look for MEs with "JIDPassFractionVS"
 	me = dbe_->get(fullPathDQMFolders[i]+"/"+(*cii));
 
@@ -212,7 +214,7 @@ void JetMETDQMOfflineClient::runClient_()
 	    tPassFraction->SetBinError(ibin+1,pow(nentries*epsilon*(1.-epsilon),0.5)); // binomial error
 	  }
 	  hPassFraction      = dbe_->book1D(tPassFraction->GetName(),tPassFraction);
-
+	  delete tPassFraction;
 	} // me->getRootObject()
 	} // me
       } // if find
