@@ -1,8 +1,8 @@
 /*
  *  See header file for a description of this class.
  *
- *  $Date: 2010/03/25 11:02:42 $
- *  $Revision: 1.36 $
+ *  $Date: 2010/04/02 12:33:13 $
+ *  $Revision: 1.37 $
  *  \author F. Chlebana - Fermilab
  *          K. Hatakeyama - Rockefeller University
  */
@@ -852,10 +852,10 @@ void CaloMETAnalyzer::computeEmHaMET(edm::Handle<edm::View<Candidate> > towers)
   _EmMET = pow(_EmMEx*_EmMEx+_EmMEy*_EmMEy,0.5);
   _EmCaloEz = sum_em_ez;
   _EmSumEt  = sum_em_et;
-  _HaMetPhi   = atan2( _EmMEy, _EmMEx ); 
+  _EmMetPhi   = atan2( _EmMEy, _EmMEx ); 
   //
   _HaMEx = -sum_ha_ex;
-  _HaMEy = -sum_ha_ex;
+  _HaMEy = -sum_ha_ey;
   _HaMET = pow(_HaMEx*_HaMEx+_HaMEy*_HaMEy,0.5);
   _HaCaloEz = sum_ha_ez;
   _HaSumEt  = sum_ha_et;
