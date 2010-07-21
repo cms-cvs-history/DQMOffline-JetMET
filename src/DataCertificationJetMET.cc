@@ -5,10 +5,12 @@
 // 
 // Original Author:  "Frank Chlebana"
 //         Created:  Sun Oct  5 13:57:25 CDT 2008
-// $Id: DataCertificationJetMET.cc,v 1.44 2010/05/18 12:06:42 sturdy Exp $
+// $Id: DataCertificationJetMET.cc,v 1.45 2010/05/18 15:09:03 hatake Exp $
 //
 
 #include "DQMOffline/JetMET/interface/DataCertificationJetMET.h"
+#include "FWCore/Framework/interface/LuminosityBlock.h"
+#include "FWCore/Framework/interface/Run.h"
 
 // Some switches
 //
