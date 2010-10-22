@@ -14,8 +14,6 @@ jetMETAnalyzer.caloMETAnalysis.allHist                = cms.bool(False)
 
 jetMETAnalyzer.caloMETAnalysis.cleanupSelection       = cms.bool(False)
 jetMETAnalyzer.caloMETNoHFAnalysis.cleanupSelection   = cms.bool(False)
-jetMETAnalyzer.caloMETHOAnalysis.cleanupSelection     = cms.bool(False)
-jetMETAnalyzer.caloMETNoHFHOAnalysis.cleanupSelection = cms.bool(False)
 jetMETAnalyzer.pfMETAnalysis.cleanupSelection         = cms.bool(False)
 jetMETAnalyzer.tcMETAnalysis.cleanupSelection         = cms.bool(False)
 

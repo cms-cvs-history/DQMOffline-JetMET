@@ -80,30 +80,6 @@ jetMETAnalyzer = cms.EDAnalyzer("JetMETAnalyzer",
      ),
  
      #
-     # For caloMETAnalysis "metHO"
-     #
-     caloMETHOAnalysis = metDQMParameters.clone(
-         METCollectionLabel = cms.InputTag("metHO"),
-         Source             = cms.string("CaloMETHO"),
-         DetectorTypes = cms.untracked.string("ecal:hbhe:hf:ho"),
-         #DebugOn = cms.untracked.bool(True),
-         Filter = cms.untracked.bool(True)
-     ),
-
-     #
-     # For caloMETAnalysis
-     #
-     caloMETNoHFHOAnalysis = metDQMParameters.clone(
-         METCollectionLabel = cms.InputTag("metNoHFHO"),
-         Source             = cms.string("CaloMETNoHFHO"),
-         DCSFilter = cms.PSet(
-           DetectorTypes = cms.untracked.string("ecal:hbhe:hf:ho"),
-           #DebugOn = cms.untracked.bool(True),
-           Filter = cms.untracked.bool(True)
-         )
-     ),
- 
-     #
      # For pfMETAnalysis
      #
      pfMETAnalysis = metDQMParameters.clone(

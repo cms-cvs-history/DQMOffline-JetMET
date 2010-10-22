@@ -1,8 +1,8 @@
 /*
  *  See header file for a description of this class.
  *
- *  $Date: 2010/05/14 18:20:04 $
- *  $Revision: 1.46 $
+ *  $Date: 2010/05/14 21:57:34 $
+ *  $Revision: 1.47 $
  *  \author F. Chlebana - Fermilab
  *          K. Hatakeyama - Rockefeller University
  */
@@ -744,8 +744,6 @@ void CaloMETAnalyzer::analyze(const edm::Event& iEvent, const edm::EventSetup& i
       int vertex_number     = vertexCollection.size();
       VertexCollection::const_iterator v = vertexCollection.begin();
       double vertex_chi2    = v->normalizedChi2();
-      //double vertex_d0      = sqrt(v->x()*v->x()+v->y()*v->y());
-      //double vertex_numTrks = v->tracksSize();
       double vertex_ndof    = v->ndof();
       bool   fakeVtx        = v->isFake();
       double vertex_sumTrks = 0.0;
@@ -756,7 +754,6 @@ void CaloMETAnalyzer::analyze(const edm::Event& iEvent, const edm::EventSetup& i
       
       if (  !fakeVtx
 	    && vertex_number>=_nvtx_min
-	    //&& vertex_numTrks>_nvtxtrks_min
 	    && vertex_ndof   >_vtxndof_min
 	    && vertex_chi2   <_vtxchi2_max
 	    && fabs(vertex_Z)<_vtxz_max ) bPrimaryVertex = true;
@@ -792,7 +789,16 @@ void CaloMETAnalyzer::analyze(const edm::Event& iEvent, const edm::EventSetup& i
       bTechTriggersNOT = bTechTriggersNOT || technicalTriggerWordBeforeMask.at(_techTrigsNOT.at(ttr));
     }
   }
-    
+  else 
+    std::cout<<"gtReadoutRecord invalid"<<std::endl;
+
+  if (_techTrigsAND.size()==0)
+    bTechTriggersAND = true;
+  if (_techTrigsOR.size()==0)
+    bTechTriggersOR = true;
+  if (_techTrigsNOT.size()==0)
+    bTechTriggersNOT = false;
+
   bTechTriggers = bTechTriggersAND && bTechTriggersOR && !bTechTriggersNOT;
     
   // ==========================================================
