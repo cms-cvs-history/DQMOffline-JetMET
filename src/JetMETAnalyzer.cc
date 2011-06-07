@@ -1,8 +1,8 @@
 /*
  *  See header file for a description of this class.
  *
- *  $Date: 2010/12/04 00:52:21 $
- *  $Revision: 1.69 $
+ *  $Date: 2011/04/02 13:52:48 $
+ *  $Revision: 1.69.6.1 $
  *  \author F. Chlebana - Fermilab
  *          K. Hatakeyama - Rockefeller University
  */
@@ -349,7 +349,7 @@ void JetMETAnalyzer::beginRun(const edm::Run& iRun, const edm::EventSetup& iSetu
       LogDebug("JetMETAnalyzer") << "HLTConfigProvider failed to initialize.";
     }
   }
-
+  /*
   hltpathME = 0;
   if (_hlt_initialized) {
   //if (hltConfig_.init(iRun,iSetup,processname_,changed)) {
@@ -362,7 +362,8 @@ void JetMETAnalyzer::beginRun(const edm::Run& iRun, const edm::EventSetup& iSetu
       if (hltpathME) hltpathME->setBinLabel(j+1,hltConfig_.triggerName(j));
       // if (hltConfig_.triggerName(j)=="HLT_PhysicsDeclared") 
     }
-  }  
+  }
+  */
   //
   //--- Jet
 
