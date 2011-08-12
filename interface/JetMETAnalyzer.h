@@ -6,8 +6,8 @@
  *
  *  DQM jetMET analysis monitoring
  *
- *  $Date: 2010/09/28 15:41:58 $
- *  $Revision: 1.22 $
+ *  $Date: 2010/10/15 13:49:54 $
+ *  $Revision: 1.23 $
  *  \author F. Chlebana - Fermilab
  *          K. Hatakeyama - Rockefeller University
  */
@@ -119,8 +119,9 @@ class JetMETAnalyzer : public edm::EDAnalyzer {
   HLTConfigProvider hltConfig_;
   std::string processname_;
 
-  MonitorElement* hltpathME;
+  //MonitorElement* hltpathME;
   MonitorElement* lumisecME;
+  MonitorElement* cleanupME;
 
   GenericTriggerEventFlag * _HighPtJetEventFlag;
   GenericTriggerEventFlag * _LowPtJetEventFlag;
@@ -179,8 +180,8 @@ class JetMETAnalyzer : public edm::EDAnalyzer {
 
   CaloMETAnalyzer   * theCaloMETAnalyzer;
   CaloMETAnalyzer   * theCaloMETNoHFAnalyzer;
-  CaloMETAnalyzer   * theCaloMETHOAnalyzer;
-  CaloMETAnalyzer   * theCaloMETNoHFHOAnalyzer;
+  //removed for optimizations//CaloMETAnalyzer   * theCaloMETHOAnalyzer;
+  //removed for optimizations//CaloMETAnalyzer   * theCaloMETNoHFHOAnalyzer;
   CaloMETAnalyzer   * theMuCorrMETAnalyzer;
 
   METAnalyzer       * theTcMETAnalyzer;
@@ -192,6 +193,7 @@ class JetMETAnalyzer : public edm::EDAnalyzer {
   JetMETDQMDCSFilter * DCSFilterCalo;
   JetMETDQMDCSFilter * DCSFilterPF;
   JetMETDQMDCSFilter * DCSFilterJPT;
+  JetMETDQMDCSFilter * DCSFilterAll;
 
 };
 #endif  

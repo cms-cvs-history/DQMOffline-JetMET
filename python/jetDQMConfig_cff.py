@@ -17,11 +17,11 @@ jetDQMParameters = cms.PSet(
     phiMax      = cms.double(3.2),
     phiMin      = cms.double(-3.2),
 
-    ptBin       = cms.int32(100),
-    ptMax       = cms.double(50.0),
-    ptMin       = cms.double(0.0),
+    ptBin       = cms.int32(90),
+    ptMax       = cms.double(100.0),
+    ptMin       = cms.double(10.0),
 
-    ptThreshold = cms.double(3.),
+    ptThreshold = cms.double(20.),
     n90HitsMin  = cms.int32(-1),
     fHPDMax     = cms.double(1.),
     resEMFMin   = cms.double(0.),

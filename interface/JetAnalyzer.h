@@ -6,8 +6,8 @@
  *
  *  DQM monitoring source for Calo Jets
  *
- *  $Date: 2010/07/21 04:23:21 $
- *  $Revision: 1.12 $
+ *  $Date: 2010/10/15 13:49:54 $
+ *  $Revision: 1.13 $
  *  \author F. Chlebana - Fermilab
  */
 
@@ -166,48 +166,57 @@ class JetAnalyzer : public JetAnalyzerBase {
   MonitorElement* mPt_Forward;
   MonitorElement* mPhi_Forward;
 
-  MonitorElement* mPt_Barrel_Lo;
-  MonitorElement* mPhi_Barrel_Lo;
-  MonitorElement* mConstituents_Barrel_Lo;
-  MonitorElement* mHFrac_Barrel_Lo;
-  MonitorElement* mPt_EndCap_Lo;
-  MonitorElement* mPhi_EndCap_Lo;
-  MonitorElement* mConstituents_EndCap_Lo;
-  MonitorElement* mHFrac_EndCap_Lo;
-  MonitorElement* mPt_Forward_Lo;
-  MonitorElement* mPhi_Forward_Lo;
-  MonitorElement* mConstituents_Forward_Lo;
-  MonitorElement* mHFrac_Forward_Lo;
+  MonitorElement* mConstituents_Barrel;
+  MonitorElement* mHFrac_Barrel;
+  MonitorElement* mEFrac_Barrel;
+  //removed for optimization//MonitorElement* mPt_Barrel_Lo;
+  //removed for optimization//MonitorElement* mPhi_Barrel_Lo;
+  //removed for optimization//MonitorElement* mConstituents_Barrel_Lo;
+  //removed for optimization//MonitorElement* mHFrac_Barrel_Lo;
+  MonitorElement* mConstituents_EndCap;
+  MonitorElement* mHFrac_EndCap;
+  MonitorElement* mEFrac_EndCap;
+  //removed for optimization//MonitorElement* mPt_EndCap_Lo;
+  //removed for optimization//MonitorElement* mPhi_EndCap_Lo;
+  //removed for optimization//MonitorElement* mConstituents_EndCap_Lo;
+  //removed for optimization//MonitorElement* mHFrac_EndCap_Lo;
+  MonitorElement* mConstituents_Forward;
+  MonitorElement* mHFrac_Forward;
+  MonitorElement* mEFrac_Forward;
+  //removed for optimization//MonitorElement* mPt_Forward_Lo;
+  //removed for optimization//MonitorElement* mPhi_Forward_Lo;
+  //removed for optimization//MonitorElement* mConstituents_Forward_Lo;
+  //removed for optimization//MonitorElement* mHFrac_Forward_Lo;
 
   MonitorElement* mPt_Barrel_Hi;
   MonitorElement* mPhi_Barrel_Hi;
-  MonitorElement* mConstituents_Barrel_Hi;
-  MonitorElement* mHFrac_Barrel_Hi;
+  //removed for optimization//MonitorElement* mConstituents_Barrel_Hi;
+  //removed for optimization//MonitorElement* mHFrac_Barrel_Hi;
   MonitorElement* mPt_EndCap_Hi;
   MonitorElement* mPhi_EndCap_Hi;
-  MonitorElement* mConstituents_EndCap_Hi;
-  MonitorElement* mHFrac_EndCap_Hi;
+  //removed for optimization//MonitorElement* mConstituents_EndCap_Hi;
+  //removed for optimization//MonitorElement* mHFrac_EndCap_Hi;
   MonitorElement* mPt_Forward_Hi;
   MonitorElement* mPhi_Forward_Hi;
-  MonitorElement* mConstituents_Forward_Hi;
-  MonitorElement* mHFrac_Forward_Hi;
+  //removed for optimization//MonitorElement* mConstituents_Forward_Hi;
+  //removed for optimization//MonitorElement* mHFrac_Forward_Hi;
   // ---
 
 
-  MonitorElement* mE_Barrel;
-  MonitorElement* mE_EndCap;
-  MonitorElement* mE_Forward;
+  //removed for optimizations//MonitorElement* mE_Barrel;
+  //removed for optimizations//MonitorElement* mE_EndCap;
+  //removed for optimizations//MonitorElement* mE_Forward;
 
-  MonitorElement* mE;
-  MonitorElement* mP;
-  MonitorElement* mMass;
+  //removed for optimizations//MonitorElement* mE;
+  //removed for optimizations//MonitorElement* mP;
+  //removed for optimizations//MonitorElement* mMass;
   MonitorElement* mNJets;
   MonitorElement* mDPhi;
 
   // Leading Jet Parameters
   MonitorElement* mEtaFirst;
   MonitorElement* mPhiFirst;
-  MonitorElement* mEFirst;
+  //removed for optimizations//MonitorElement* mEFirst;
   MonitorElement* mPtFirst;
 
 
@@ -227,8 +236,8 @@ class JetAnalyzer : public JetAnalyzerBase {
   MonitorElement* mfHPD;
   MonitorElement* mfRBX;
   MonitorElement* mresEMF;
-  MonitorElement* msigmaEta;
-  MonitorElement* msigmaPhi;
+  //removed for optimizations//MonitorElement* msigmaEta;
+  //removed for optimizations//MonitorElement* msigmaPhi;
   MonitorElement* mLooseJIDPassFractionVSeta;
   MonitorElement* mLooseJIDPassFractionVSpt;
   MonitorElement* mTightJIDPassFractionVSeta;

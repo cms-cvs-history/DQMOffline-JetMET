@@ -6,8 +6,8 @@
  *
  *  DQM monitoring source for PFlow Jets
  *
- *  $Date: 2010/03/04 16:31:52 $
- *  $Revision: 1.5 $
+ *  $Date: 2010/10/15 13:49:54 $
+ *  $Revision: 1.6 $
  *  \author F. Chlebana - Fermilab
  */
 
@@ -148,48 +148,57 @@ class PFJetAnalyzer : public PFJetAnalyzerBase {
   MonitorElement* mPt_Forward;
   MonitorElement* mPhi_Forward;
 
-  MonitorElement* mPt_Barrel_Lo;
-  MonitorElement* mPhi_Barrel_Lo;
-  MonitorElement* mConstituents_Barrel_Lo;
-  MonitorElement* mHFrac_Barrel_Lo;
-  MonitorElement* mPt_EndCap_Lo;
-  MonitorElement* mPhi_EndCap_Lo;
-  MonitorElement* mConstituents_EndCap_Lo;
-  MonitorElement* mHFrac_EndCap_Lo;
-  MonitorElement* mPt_Forward_Lo;
-  MonitorElement* mPhi_Forward_Lo;
-  MonitorElement* mConstituents_Forward_Lo;
-  MonitorElement* mHFrac_Forward_Lo;
+  MonitorElement* mConstituents_Barrel;
+  MonitorElement* mHFrac_Barrel;
+  MonitorElement* mEFrac_Barrel;
+  //removed for optimization//MonitorElement* mPt_Barrel_Lo;
+  //removed for optimization//MonitorElement* mPhi_Barrel_Lo;
+  //removed for optimization//MonitorElement* mConstituents_Barrel_Lo;
+  //removed for optimization//MonitorElement* mHFrac_Barrel_Lo;
+  MonitorElement* mConstituents_EndCap;
+  MonitorElement* mHFrac_EndCap;
+  MonitorElement* mEFrac_EndCap;
+  //removed for optimization//MonitorElement* mPt_EndCap_Lo;
+  //removed for optimization//MonitorElement* mPhi_EndCap_Lo;
+  //removed for optimization//MonitorElement* mConstituents_EndCap_Lo;
+  //removed for optimization//MonitorElement* mHFrac_EndCap_Lo;
+  MonitorElement* mConstituents_Forward;
+  MonitorElement* mHFrac_Forward;
+  MonitorElement* mEFrac_Forward;
+  //removed for optimization//MonitorElement* mPt_Forward_Lo;
+  //removed for optimization//MonitorElement* mPhi_Forward_Lo;
+  //removed for optimization//MonitorElement* mConstituents_Forward_Lo;
+  //removed for optimization//MonitorElement* mHFrac_Forward_Lo;
 
   MonitorElement* mPt_Barrel_Hi;
   MonitorElement* mPhi_Barrel_Hi;
-  MonitorElement* mConstituents_Barrel_Hi;
-  MonitorElement* mHFrac_Barrel_Hi;
+  //removed for optimization//MonitorElement* mConstituents_Barrel_Hi;
+  //removed for optimization//MonitorElement* mHFrac_Barrel_Hi;
   MonitorElement* mPt_EndCap_Hi;
   MonitorElement* mPhi_EndCap_Hi;
-  MonitorElement* mConstituents_EndCap_Hi;
-  MonitorElement* mHFrac_EndCap_Hi;
+  //removed for optimization//MonitorElement* mConstituents_EndCap_Hi;
+  //removed for optimization//MonitorElement* mHFrac_EndCap_Hi;
   MonitorElement* mPt_Forward_Hi;
   MonitorElement* mPhi_Forward_Hi;
-  MonitorElement* mConstituents_Forward_Hi;
-  MonitorElement* mHFrac_Forward_Hi;
+  //removed for optimization//MonitorElement* mConstituents_Forward_Hi;
+  //removed for optimization//MonitorElement* mHFrac_Forward_Hi;
   // ---
 
 
-  MonitorElement* mE_Barrel;
-  MonitorElement* mE_EndCap;
-  MonitorElement* mE_Forward;
+  //removed for optimizations//MonitorElement* mE_Barrel;
+  //removed for optimizations//MonitorElement* mE_EndCap;
+  //removed for optimizations//MonitorElement* mE_Forward;
 
-  MonitorElement* mE;
-  MonitorElement* mP;
-  MonitorElement* mMass;
+  //removed for optimizations//MonitorElement* mE;
+  //removed for optimizations//MonitorElement* mP;
+  //removed for optimizations//MonitorElement* mMass;
   MonitorElement* mNJets;
   MonitorElement* mDPhi;
 
   // Leading Jet Parameters
   MonitorElement* mEtaFirst;
   MonitorElement* mPhiFirst;
-  MonitorElement* mEFirst;
+  //removed for optimizations//MonitorElement* mEFirst;
   MonitorElement* mPtFirst;
 
   // Events passing the jet triggers
