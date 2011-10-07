@@ -1,8 +1,8 @@
 /*
  *  See header file for a description of this class.
  *
- *  $Date: 2011/06/07 16:42:19 $
- *  $Revision: 1.69.6.2 $
+ *  $Date: 2011/08/12 15:29:34 $
+ *  $Revision: 1.69.6.3 $
  *  \author F. Chlebana - Fermilab
  *          K. Hatakeyama - Rockefeller University
  */
@@ -164,6 +164,8 @@ JetMETAnalyzer::JetMETAnalyzer(const edm::ParameterSet& pSet) {
   _HighPtJetEventFlag = new GenericTriggerEventFlag( highptjetparms );
   _LowPtJetEventFlag  = new GenericTriggerEventFlag( lowptjetparms  );
 
+  highPtJetExpr_ = highptjetparms.getParameter<std::vector<std::string> >("hltPaths");
+  lowPtJetExpr_  = lowptjetparms .getParameter<std::vector<std::string> >("hltPaths");
 
   // --- do the analysis on the MET
   if(theCaloMETAnalyzerFlag){
@@ -348,6 +350,11 @@ void JetMETAnalyzer::beginRun(const edm::Run& iRun, const edm::EventSetup& iSetu
   if ( _HighPtJetEventFlag->on() ) _HighPtJetEventFlag->initRun( iRun, iSetup );
   if ( _LowPtJetEventFlag ->on() ) _LowPtJetEventFlag ->initRun( iRun, iSetup );
 
+  if (_HighPtJetEventFlag->on() && _HighPtJetEventFlag->expressionsFromDB(_HighPtJetEventFlag->hltDBKey(), iSetup)[0] != "CONFIG_ERROR")
+    highPtJetExpr_ = _HighPtJetEventFlag->expressionsFromDB(_HighPtJetEventFlag->hltDBKey(), iSetup);
+  if (_LowPtJetEventFlag->on() && _LowPtJetEventFlag->expressionsFromDB(_LowPtJetEventFlag->hltDBKey(), iSetup)[0] != "CONFIG_ERROR")
+    lowPtJetExpr_  = _LowPtJetEventFlag->expressionsFromDB(_LowPtJetEventFlag->hltDBKey(),   iSetup);
+
   //--- htlConfig_
   //processname_="HLT";
   bool changed(true);
@@ -435,6 +442,9 @@ void JetMETAnalyzer::analyze(const edm::Event& iEvent, const edm::EventSetup& iS
   bool bPhysicsDeclared = false;
   if(!_doHLTPhysicsOn) bPhysicsDeclared = true;
 
+  Int_t JetLoPass = 0;
+  Int_t JetHiPass = 0;
+
   if (triggerResults.isValid()){
     const edm::TriggerNames & triggerNames = iEvent.triggerNames(*triggerResults);
     
@@ -452,19 +462,27 @@ void JetMETAnalyzer::analyze(const edm::Event& iEvent, const edm::EventSetup& iS
 	}
       }
       }*/
+    const unsigned int nTrig(triggerNames.size());
+    for (unsigned int i=0;i<nTrig;++i)
+      {
+	if (triggerNames.triggerName(i).find(highPtJetExpr_[0].substr(0,highPtJetExpr_[0].rfind("_v")+2))!=std::string::npos && triggerResults->accept(i))
+	    JetHiPass=1;
+	else if (triggerNames.triggerName(i).find(lowPtJetExpr_[0].substr(0,lowPtJetExpr_[0].rfind("_v")+2))!=std::string::npos && triggerResults->accept(i))
+	    JetLoPass=1;
+      }
   }
   
   if (DEBUG)  std::cout << "trigger label " << theTriggerResultsLabel << std::endl;
 
-  Int_t JetLoPass = 0;
-  Int_t JetHiPass = 0;
 
-  if ( _HighPtJetEventFlag->on() && _HighPtJetEventFlag->accept( iEvent, iSetup ) ) 
+  /*
+    if ( _HighPtJetEventFlag->on() && _HighPtJetEventFlag->accept( iEvent, iSetup ) ) 
     JetHiPass=1;
-  
-  if ( _LowPtJetEventFlag->on() && _LowPtJetEventFlag->accept( iEvent, iSetup ) ) 
+    
+    if ( _LowPtJetEventFlag->on() && _LowPtJetEventFlag->accept( iEvent, iSetup ) ) 
     JetLoPass=1;
-  
+  */
+
   //if (triggerResults.isValid()) {
   //
   //  if (DEBUG) std::cout << "trigger valid " << std::endl;

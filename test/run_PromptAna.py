@@ -23,7 +23,7 @@ jobname = (os.environ.get('JOB_NAME','test'))
 print 'jobname (default=test) = '+str(jobname)
 #
 # --- [number of events (default=1000)]
-nevents = int(os.environ.get('NEVENTS','5000'))
+nevents = int(os.environ.get('NEVENTS','1000'))
 print 'nevents (default=1000)  = '+str(nevents)
 #
 # --- [turn on all histograms (default=True)?]
@@ -86,13 +86,15 @@ process.load("RecoMET/Configuration/RecoMET_BeamHaloId_cff")
 #process.GlobalTag.globaltag ='GR_R_38X_V13A::All'
 process.GlobalTag.globaltag ='GR_R_42_V19::All'
 
-process.GlobalTag.toGet = cms.VPSet(
-  cms.PSet(record = cms.string("AlCaRecoTriggerBitsRcd"),
-           tag = cms.string("AlcaRecoTriggerBits_JetMET_DQM_v0_hlt"),
-           connect = cms.untracked.string( 'frontier://FrontierProd/CMS_COND_42X_DQM' )
-           #connect = cms.untracked.string("sqlite_file:/tmp/sturdy/CMSSW_4_3_0_pre7/src/GenericTriggerEventFlag_JetMET_DQM_HLT.db")
-           )
-  )
+##uncomment below for testing the JetMET Trigger Bits
+#process.GlobalTag.toGet = cms.VPSet(
+#  cms.PSet(record = cms.string("AlCaRecoTriggerBitsRcd"),
+#           label = cms.untracked.string("JetMETDQMTrigger"),
+#           tag = cms.string("AlcaRecoTriggerBits_JetMET_DQM_v0_hlt"),
+#           connect = cms.untracked.string( 'frontier://FrontierProd/CMS_COND_42X_DQM' )
+#           )
+#  )
+
 # the task - JetMET objects
 if iscosmics =="True":
   process.load("DQMOffline.JetMET.jetMETDQMOfflineSourceCosmic_cff")

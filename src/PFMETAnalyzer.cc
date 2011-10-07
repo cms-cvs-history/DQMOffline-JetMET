@@ -1,8 +1,8 @@
 /*
  *  See header file for a description of this class.
  *
- *  $Date: 2011/04/29 17:32:56 $
- *  $Revision: 1.34.6.3 $
+ *  $Date: 2011/08/12 15:29:57 $
+ *  $Revision: 1.34.6.4 $
  *  \author K. Hatakeyama - Rockefeller University
  *          A.Apresyan - Caltech
  */
@@ -54,6 +54,13 @@ PFMETAnalyzer::PFMETAnalyzer(const edm::ParameterSet& pSet) {
   _EleEventFlag       = new GenericTriggerEventFlag( eleparms       );
   _MuonEventFlag      = new GenericTriggerEventFlag( muonparms      );
 
+  highPtJetExpr_ = highptjetparms.getParameter<std::vector<std::string> >("hltPaths");
+  lowPtJetExpr_  = lowptjetparms .getParameter<std::vector<std::string> >("hltPaths");
+  highMETExpr_   = minbiasparms  .getParameter<std::vector<std::string> >("hltPaths");
+  lowMETExpr_    = highmetparms  .getParameter<std::vector<std::string> >("hltPaths");
+  muonExpr_      = lowmetparms   .getParameter<std::vector<std::string> >("hltPaths");
+  elecExpr_      = eleparms      .getParameter<std::vector<std::string> >("hltPaths");
+  minbiasExpr_   = muonparms     .getParameter<std::vector<std::string> >("hltPaths");
 
 }
 
@@ -304,6 +311,21 @@ void PFMETAnalyzer::beginRun(const edm::Run& iRun, const edm::EventSetup& iSetup
   if ( _EleEventFlag      ->on() ) _EleEventFlag      ->initRun( iRun, iSetup );
   if ( _MuonEventFlag     ->on() ) _MuonEventFlag     ->initRun( iRun, iSetup );
 
+  if (_HighPtJetEventFlag->on() && _HighPtJetEventFlag->expressionsFromDB(_HighPtJetEventFlag->hltDBKey(), iSetup)[0] != "CONFIG_ERROR")
+    highPtJetExpr_ = _HighPtJetEventFlag->expressionsFromDB(_HighPtJetEventFlag->hltDBKey(), iSetup);
+  if (_LowPtJetEventFlag->on() && _LowPtJetEventFlag->expressionsFromDB(_LowPtJetEventFlag->hltDBKey(), iSetup)[0] != "CONFIG_ERROR")
+    lowPtJetExpr_  = _LowPtJetEventFlag->expressionsFromDB(_LowPtJetEventFlag->hltDBKey(),   iSetup);
+  if (_HighMETEventFlag->on() && _HighMETEventFlag->expressionsFromDB(_HighMETEventFlag->hltDBKey(), iSetup)[0] != "CONFIG_ERROR")
+    highMETExpr_   = _HighMETEventFlag->expressionsFromDB(_HighMETEventFlag->hltDBKey(),     iSetup);
+  if (_LowMETEventFlag->on() && _LowMETEventFlag->expressionsFromDB(_LowMETEventFlag->hltDBKey(), iSetup)[0] != "CONFIG_ERROR")
+    lowMETExpr_    = _LowMETEventFlag->expressionsFromDB(_LowMETEventFlag->hltDBKey(),       iSetup);
+  if (_MuonEventFlag->on() && _MuonEventFlag->expressionsFromDB(_MuonEventFlag->hltDBKey(), iSetup)[0] != "CONFIG_ERROR")
+    muonExpr_      = _MuonEventFlag->expressionsFromDB(_MuonEventFlag->hltDBKey(),           iSetup);
+  if (_EleEventFlag->on() && _EleEventFlag->expressionsFromDB(_EleEventFlag->hltDBKey(), iSetup)[0] != "CONFIG_ERROR")
+    elecExpr_      = _EleEventFlag->expressionsFromDB(_EleEventFlag->hltDBKey(),             iSetup);
+  if (_MinBiasEventFlag->on() && _MinBiasEventFlag->expressionsFromDB(_MinBiasEventFlag->hltDBKey(), iSetup)[0] != "CONFIG_ERROR")
+    minbiasExpr_   = _MinBiasEventFlag->expressionsFromDB(_MinBiasEventFlag->hltDBKey(),     iSetup);
+  
 }
 
 // ***********************************************************
@@ -429,6 +451,25 @@ void PFMETAnalyzer::analyze(const edm::Event& iEvent, const edm::EventSetup& iSe
     
     //
     //
+    const unsigned int nTrig(triggerNames.size());
+    for (unsigned int i=0;i<nTrig;++i)
+      {
+	if (triggerNames.triggerName(i).find(highPtJetExpr_[0].substr(0,highPtJetExpr_[0].rfind("_v")+2))!=std::string::npos && triggerResults.accept(i))
+	    _trig_HighPtJet=true;
+	else if (triggerNames.triggerName(i).find(lowPtJetExpr_[0].substr(0,lowPtJetExpr_[0].rfind("_v")+2))!=std::string::npos && triggerResults.accept(i))
+	    _trig_LowPtJet=true;
+	else if (triggerNames.triggerName(i).find(highMETExpr_[0].substr(0,highMETExpr_[0].rfind("_v")+2))!=std::string::npos && triggerResults.accept(i))
+	    _trig_HighMET=true;
+	else if (triggerNames.triggerName(i).find(lowMETExpr_[0].substr(0,lowMETExpr_[0].rfind("_v")+2))!=std::string::npos && triggerResults.accept(i))
+	    _trig_LowMET=true;
+	else if (triggerNames.triggerName(i).find(muonExpr_[0].substr(0,muonExpr_[0].rfind("_v")+2))!=std::string::npos && triggerResults.accept(i))
+	    _trig_Muon=true;
+	else if (triggerNames.triggerName(i).find(elecExpr_[0].substr(0,elecExpr_[0].rfind("_v")+2))!=std::string::npos && triggerResults.accept(i))
+	    _trig_Ele=true;
+	else if (triggerNames.triggerName(i).find(minbiasExpr_[0].substr(0,minbiasExpr_[0].rfind("_v")+2))!=std::string::npos && triggerResults.accept(i))
+	    _trig_MinBias=true;
+      }
+    
     // count number of requested Jet or MB HLT paths which have fired
     for (unsigned int i=0; i!=HLTPathsJetMBByName_.size(); i++) {
       unsigned int triggerIndex = triggerNames.triggerIndex(HLTPathsJetMBByName_[i]);
@@ -441,35 +482,37 @@ void PFMETAnalyzer::analyze(const edm::Event& iEvent, const edm::EventSetup& iSe
     // for empty input vectors (n==0), take all HLT triggers!
     if (HLTPathsJetMBByName_.size()==0) _trig_JetMB=triggerResults.size()-1;
 
-    if ( _HighPtJetEventFlag->on() && _HighPtJetEventFlag->accept( iEvent, iSetup ) ) 
+    /*
+      if ( _HighPtJetEventFlag->on() && _HighPtJetEventFlag->accept( iEvent, iSetup ) ) 
       _trig_HighPtJet=1;
-
-    if ( _LowPtJetEventFlag->on() && _LowPtJetEventFlag->accept( iEvent, iSetup ) ) 
+      
+      if ( _LowPtJetEventFlag->on() && _LowPtJetEventFlag->accept( iEvent, iSetup ) ) 
       _trig_LowPtJet=1;
-    
-    if ( _MinBiasEventFlag->on() && _MinBiasEventFlag->accept( iEvent, iSetup ) ) 
+      
+      if ( _MinBiasEventFlag->on() && _MinBiasEventFlag->accept( iEvent, iSetup ) ) 
       _trig_MinBias=1;
-    
-    if ( _HighMETEventFlag->on() && _HighMETEventFlag->accept( iEvent, iSetup ) ) 
+      
+      if ( _HighMETEventFlag->on() && _HighMETEventFlag->accept( iEvent, iSetup ) ) 
       _trig_HighMET=1;
-    
-    if ( _LowMETEventFlag->on() && _LowMETEventFlag->accept( iEvent, iSetup ) ) 
+      
+      if ( _LowMETEventFlag->on() && _LowMETEventFlag->accept( iEvent, iSetup ) ) 
       _trig_LowMET=1;
-    
-    if ( _EleEventFlag->on() && _EleEventFlag->accept( iEvent, iSetup ) ) 
+      
+      if ( _EleEventFlag->on() && _EleEventFlag->accept( iEvent, iSetup ) ) 
       _trig_Ele=1;
-    
-    if ( _MuonEventFlag->on() && _MuonEventFlag->accept( iEvent, iSetup ) ) 
+      
+      if ( _MuonEventFlag->on() && _MuonEventFlag->accept( iEvent, iSetup ) ) 
       _trig_Muon=1;
+    */
     
     if (triggerNames.triggerIndex(_hlt_PhysDec)   != triggerNames.size() &&
-        triggerResults.accept(triggerNames.triggerIndex(_hlt_PhysDec)))   _trig_PhysDec=1;
+	triggerResults.accept(triggerNames.triggerIndex(_hlt_PhysDec)))   _trig_PhysDec=1;
     
   } else {
-
+    
     edm::LogInfo("PFMetAnalyzer") << "TriggerResults::HLT not found, "
       "automatically select events"; 
-
+    
     // TriggerResults object not found. Look at all events.    
     _trig_JetMB=1;
   }

@@ -5,8 +5,8 @@
  *
  *  DQM monitoring source for CaloMET
  *
- *  $Date: 2010/09/22 19:40:27 $
- *  $Revision: 1.27 $
+ *  $Date: 2011/08/12 15:30:33 $
+ *  $Revision: 1.27.8.1 $
  *  \author F. Chlebana - Fermilab
  *          K. Hatakeyama - Rockefeller University
  */
@@ -134,6 +134,14 @@ class CaloMETAnalyzer : public CaloMETAnalyzerBase {
   std::string _hlt_Ele;
   std::string _hlt_Muon;
 
+  std::vector<std::string> highPtJetExpr_;
+  std::vector<std::string> lowPtJetExpr_;
+  std::vector<std::string> highMETExpr_;
+  std::vector<std::string> lowMETExpr_;
+  std::vector<std::string> muonExpr_;
+  std::vector<std::string> elecExpr_;
+  std::vector<std::string> minbiasExpr_;
+  
   edm::ParameterSet theCleaningParameters;
   std::string _hlt_PhysDec;
 
