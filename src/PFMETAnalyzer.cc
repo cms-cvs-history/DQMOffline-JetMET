@@ -1,8 +1,8 @@
 /*
  *  See header file for a description of this class.
  *
- *  $Date: 2011/10/07 14:41:19 $
- *  $Revision: 1.34.6.5 $
+ *  $Date: 2011/10/10 14:35:50 $
+ *  $Revision: 1.34.6.6 $
  *  \author K. Hatakeyama - Rockefeller University
  *          A.Apresyan - Caltech
  */
@@ -208,37 +208,37 @@ void PFMETAnalyzer::bookMESet(std::string DirName)
 
   if ( _HighPtJetEventFlag->on() ) {
     bookMonitorElement(DirName+"/"+"HighPtJet",false);
-    meTriggerName_HighPtJet = _dbe->bookString("triggerName_HighPtJet", _hlt_HighPtJet);
+    meTriggerName_HighPtJet = _dbe->bookString("triggerName_HighPtJet", highPtJetExpr_[0]);
   }  
 
   if ( _LowPtJetEventFlag->on() ) {
     bookMonitorElement(DirName+"/"+"LowPtJet",false);
-    meTriggerName_LowPtJet = _dbe->bookString("triggerName_LowPtJet", _hlt_LowPtJet);
+    meTriggerName_LowPtJet = _dbe->bookString("triggerName_LowPtJet", lowPtJetExpr_[0]);
   }
 
   if ( _MinBiasEventFlag->on() ) {
     bookMonitorElement(DirName+"/"+"MinBias",false);
-    meTriggerName_MinBias = _dbe->bookString("triggerName_MinBias", _hlt_MinBias);
+    meTriggerName_MinBias = _dbe->bookString("triggerName_MinBias", minbiasExpr_[0]);
   }
 
   if ( _HighMETEventFlag->on() ) {
     bookMonitorElement(DirName+"/"+"HighMET",false);
-    meTriggerName_HighMET = _dbe->bookString("triggerName_HighMET", _hlt_HighMET);
+    meTriggerName_HighMET = _dbe->bookString("triggerName_HighMET", highMETExpr_[0]);
   }
 
   if ( _LowMETEventFlag->on() ) {
     bookMonitorElement(DirName+"/"+"LowMET",false);
-    meTriggerName_LowMET = _dbe->bookString("triggerName_LowMET", _hlt_LowMET);
+    meTriggerName_LowMET = _dbe->bookString("triggerName_LowMET", lowMETExpr_[0]);
   }
 
   if ( _EleEventFlag->on() ) {
     bookMonitorElement(DirName+"/"+"Ele",false);
-    meTriggerName_Ele = _dbe->bookString("triggerName_Ele", _hlt_Ele);
+    meTriggerName_Ele = _dbe->bookString("triggerName_Ele", elecExpr_[0]);
   }
 
   if ( _MuonEventFlag->on() ) {
     bookMonitorElement(DirName+"/"+"Muon",false);
-    meTriggerName_Muon = _dbe->bookString("triggerName_Muon", _hlt_Muon);
+    meTriggerName_Muon = _dbe->bookString("triggerName_Muon", muonExpr_[0]);
   }
 }
 
