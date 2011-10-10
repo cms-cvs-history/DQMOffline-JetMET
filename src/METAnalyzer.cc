@@ -1,8 +1,8 @@
 /*
  *  See header file for a description of this class.
  *
- *  $Date: 2011/08/12 15:29:52 $
- *  $Revision: 1.38.6.4 $
+ *  $Date: 2011/10/07 14:41:19 $
+ *  $Revision: 1.38.6.5 $
  *  \author A.Apresyan - Caltech
  *          K.Hatakeyama - Baylor
  */
@@ -54,11 +54,11 @@ METAnalyzer::METAnalyzer(const edm::ParameterSet& pSet) {
 
   highPtJetExpr_ = highptjetparms.getParameter<std::vector<std::string> >("hltPaths");
   lowPtJetExpr_  = lowptjetparms .getParameter<std::vector<std::string> >("hltPaths");
-  highMETExpr_   = minbiasparms  .getParameter<std::vector<std::string> >("hltPaths");
-  lowMETExpr_    = highmetparms  .getParameter<std::vector<std::string> >("hltPaths");
-  muonExpr_      = lowmetparms   .getParameter<std::vector<std::string> >("hltPaths");
+  highMETExpr_   = highmetparms  .getParameter<std::vector<std::string> >("hltPaths");
+  lowMETExpr_    = lowmetparms   .getParameter<std::vector<std::string> >("hltPaths");
+  muonExpr_      = muonparms     .getParameter<std::vector<std::string> >("hltPaths");
   elecExpr_      = eleparms      .getParameter<std::vector<std::string> >("hltPaths");
-  minbiasExpr_   = muonparms     .getParameter<std::vector<std::string> >("hltPaths");
+  minbiasExpr_   = minbiasparms  .getParameter<std::vector<std::string> >("hltPaths");
 
 }
 
